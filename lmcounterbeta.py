@@ -48,7 +48,7 @@ st.write("")
 
 # Define the Streamlit app
 def main():
-    st.write("<h4 style='text-align: center;'>REGISTER AND SEARCH COUNTER</h4>", unsafe_allow_html=True)
+    st.write("<h4 style='text-align: center;'>REGISTER TROOP COMP/FORM COUNTER</h4>", unsafe_allow_html=True)
     st.write("")
 
     input1 = st.text_input("Enemy Comp", "")
@@ -62,7 +62,7 @@ def main():
         st.success("Data saved")
         st.button("Reset")
 
-    st.write("<h4 style='text-align: center;'>SEARCH AND COUNTER</h4>", unsafe_allow_html=True)
+    st.write("<h4 style='text-align: center;'>SUGGESTED TROOP COMP/FORM COUNTER</h4>", unsafe_allow_html=True)
     search_input1 = st.text_input("Enemy Comp", "", key="unique_key_1")
     search_input2 = st.selectbox("Enemy Formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"], key="unique_key_2")
     search_button = st.button("Search")
