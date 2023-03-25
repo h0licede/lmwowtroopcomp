@@ -81,8 +81,11 @@ if __name__ == "__main__":
 
 import streamlit as st
 
-st.title("My Streamlit App")
+st.subheader("Donation")
 
-st.write("If you're feeling generous and want to support my caffeine addiction while I work on this project, consider donating to my coffee fund. I promise I'll use it to stay awake and make more cool stuff 😜.")
+import streamlit as st
+
+st.markdown("<h1 style='text-align: center;'>If you're feeling generous and want to support my caffeine addiction while I work on this project, consider donating to my coffee fund. I promise I'll use it to stay awake and make more cool stuff 😜.</h1>", unsafe_allow_html=True)
+
 
 st.markdown('<div style="text-align:center"><a href="https://paypal.me/h0licede" target="_blank" rel="noopener noreferrer">Please consider donating to my coffee fund to support my work</a></div>', unsafe_allow_html=True)
