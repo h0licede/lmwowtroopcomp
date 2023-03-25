@@ -23,6 +23,6 @@ If no values are found, a warning message will be displayed.
 Click the "Reset" button to clear all input fields and start again.
 
 Support
-If you have any questions or concerns, please contact us at asupport@accesstv.live.
+If you have any questions or concerns, please contact us at support@accesstv.live.
 
-Note: The troop compositions and formations should be entered as 4 values separated by commas, e.g. "1000,2000,3000,4000".
+
