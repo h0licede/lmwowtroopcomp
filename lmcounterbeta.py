@@ -81,22 +81,7 @@ if __name__ == "__main__":
 
 
 
-import streamlit as st
-import pandas as pd
 
-# Read in the data
-data = pd.read_csv("data.txt", sep="\t")
-
-# Find the suggested comp and formation with the most duplicate entries
-most_common_suggested_comp = data["Suggested Comp"].value_counts().idxmax()
-most_common_suggested_formation = data["Suggested Formation"].value_counts().idxmax()
-
-# Highlight the rows where the suggested comp and formation match the most common values
-data["Suggested Comp"] = data["Suggested Comp"].apply(lambda x: f"<mark>{x}</mark>" if x == most_common_suggested_comp else x)
-data["Suggested Formation"] = data["Suggested Formation"].apply(lambda x: f"<mark>{x}</mark>" if x == most_common_suggested_formation else x)
-
-# Display the data table
-st.write(data, unsafe_allow_html=True)
 
 
 
