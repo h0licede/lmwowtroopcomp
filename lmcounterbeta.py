@@ -42,6 +42,8 @@ def search_data(search_input1, search_input2):
     return None, None
 
 
+st.write("")
+
 # Define the Streamlit app
 def main():
     st.write("<h4 style='text-align: center;'>REGISTER AND SEARCH COUNTER</h4>", unsafe_allow_html=True)
