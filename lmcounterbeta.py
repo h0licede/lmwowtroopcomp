@@ -15,8 +15,6 @@ st.write("<h4 style='font-size: 14px; text-align: center;'>This app is designed 
 
 st.write("")
 st.write("")
-st.write("<h4 style='font-size: 14px; text-align: center;'>Disclaimer: Please note that the data provided in this app is intended as a starting guideline only and may not be entirely accurate. Use it at your own discretion and always use your own judgement and skill to improve your gameplay.</h4>", unsafe_allow_html=True)
-
 st.write("")
 
 
@@ -117,6 +115,23 @@ if __name__ == "__main__":
 
 
 
+import streamlit as st
+
+# Define the sidebar
+st.sidebar.title("Please report inaccurate troop comp and formation suggestion")
+
+# Add a header to the sidebar
+st.sidebar.header("Help us improve!")
+st.sidebar.write("If you find any inaccurate troop comp and formation suggestions, please report it to support@accesstv.live")
+
+# Add a separator to the sidebar
+st.sidebar.markdown("---")
+
+# Add some additional information to the sidebar
+st.sidebar.write("This app is provided as a starting guideline for improving your gameplay. Please note that the suggested troop comps and formations may not always be accurate.")
+  
+
+import streamlit as st
 
 
 
@@ -139,3 +154,14 @@ st.write("")
 st.write("")
 
 st.write("<h4 style='font-size: 14px; text-align: center;'>Join Dark Knights [D!K] guild now! We are looking for experienced rally leaders and T4/T5 fillers to join our team. Be a part of our growing community and conquer the kingdom together.</h4>", unsafe_allow_html=True)
+
+st.write("")
+
+
+
+
+st.markdown(
+    f'<div style="display: flex; justify-content: center;"><img src="https://s2.gifyu.com/images/dark-kinights-white-giffddf999a8d0a6add.gif" width="250"/></div>',
+    unsafe_allow_html=True
+)
+
