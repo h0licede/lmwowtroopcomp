@@ -7,7 +7,7 @@ st.set_page_config(page_title="LORDS MOBILE WOW TROOP COMP")
 st.title("LORDS MOBILE WOW TROOP COMP")
 import streamlit as st
 
-st.write("<h4 style='text-align: center;'>This app is designed specifically for Lords Mobile gamers experienced in leading rallies in World of Wonder, Baron, etc. With our easy-to-use input functions, you can get suggestions on what troop comps to use to counter your enemy's composition and what formations are best suited for your individual stats.</h1>", unsafe_allow_html=True)
+st.write("<h4 style='text-align: center;'>This app is designed specifically for Lords Mobile gamers experienced in leading rallies in World of Wonder, Baron, etc. With our easy-to-use input functions, you can get suggestions on what troop comps to use to counter your enemy's composition and what formations are best suited for your individual stats.</h4>", unsafe_allow_html=True)
 
 
 
@@ -44,7 +44,7 @@ def search_data(search_input1, search_input2):
 
 # Define the Streamlit app
 def main():
-    st.subheader("Register and search counter data")
+    st.write("<h4 style='text-align: center;'>REGISTER AND SEARCH COUNTER</h4>", unsafe_allow_html=True)
     st.write("")
 
     input1 = st.text_input("Enemy Comp", "")
@@ -58,7 +58,7 @@ def main():
         st.success("Data saved")
         st.button("Reset")
 
-    st.subheader("Search counter data")
+    st.write("<h4 style='text-align: center;'>SEARCH AND COUNTER</h4>", unsafe_allow_html=True)
     search_input1 = st.text_input("Enemy Comp", "", key="unique_key_1")
     search_input2 = st.selectbox("Enemy Formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"], key="unique_key_2")
     search_button = st.button("Search")
@@ -84,11 +84,11 @@ if __name__ == "__main__":
 
 import streamlit as st
 
-st.write("<h4 style='text-align: center;'>Donation</h1>", unsafe_allow_html=True)
+st.write("<h4 style='text-align: center;'>Donation</h4>", unsafe_allow_html=True)
 
 import streamlit as st
 
-st.write("<h4 style='text-align: center;'>If you're feeling generous and want to support my caffeine addiction while I work on this project, consider donating to my coffee fund. I promise I'll use it to stay awake and make more cool stuff 😜</h1>", unsafe_allow_html=True)
+st.write("<h4 style='text-align: center;'>If you're feeling generous and want to support my caffeine addiction while I work on this project, consider donating to my coffee fund. I promise I'll use it to stay awake and make more cool stuff 😜</h4>", unsafe_allow_html=True)
 
 
 st.markdown('<div style="text-align:center"><a href="https://paypal.me/h0licede" target="_blank" rel="noopener noreferrer">Please consider donating to my coffee fund to support my work</a></div>', unsafe_allow_html=True)
