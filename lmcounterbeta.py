@@ -15,6 +15,8 @@ st.write("<h4 style='font-size: 14px; text-align: center;'>This app is designed 
 
 st.write("")
 st.write("")
+st.write("<h4 style='font-size: 14px; text-align: center;'>Disclaimer: Please note that the data provided in this app is intended as a starting guideline only and may not be entirely accurate. Use it at your own discretion and always use your own judgement and skill to improve your gameplay</h4>", unsafe_allow_html=True)
+
 st.write("")
 
 
