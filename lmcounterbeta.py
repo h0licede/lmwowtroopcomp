@@ -7,7 +7,9 @@ st.set_page_config(page_title="LORDS MOBILE WOW TROOP COMP")
 st.title("LORDS MOBILE WOW TROOP COMP")
 import streamlit as st
 
-st.write("<h4 style='text-align: center;'>This app is designed specifically for Lords Mobile gamers experienced in leading rallies in World of Wonder, Baron, etc. With our easy-to-use input functions, you can get suggestions on what troop comps to use to counter your enemy's composition and what formations are best suited for your individual stats.</h4>", unsafe_allow_html=True)
+
+st.write("<h4 style='font-size: 14px; text-align: center;'>This app is designed specifically for inexperienced / experienced Lords Mobile gamers who lead rallies in World of Wonder, Baron, etc. Using our easy-to-use input functions, you can register and save data on enemy compositions and the troop compositions and formations that you used to counter them. The app uses this registered data to suggest the most common troop compositions and formations used to counter a given enemy composition. The search results show the three most common registered entries for each enemy composition and formation combination.</h4>", unsafe_allow_html=True)
+
 
 
 
@@ -32,21 +34,17 @@ def save_data(input1, input2, output1, output2):
 
 # Define the function to search for an output value based on input values
 def search_data(search_input1, search_input2):
-    with open("data.txt", "r") as f:
+    matching_entries = []
+    with open(filename, "r") as f:
         for line in f:
-            values = line.strip().split(",")
-            if len(values) == 4:
-                saved_input1, saved_input2, saved_output1, saved_output2 = values
-                if search_input1 == saved_input1 and search_input2 == saved_input2:
-                    return saved_output1, saved_output2
-    return None, None
-
-
-st.write("")
-st.write("")
-st.write("")
+            input1, input2, output1, output2 = line.strip().split(",")
+            if input1 == search_input1 and (search_input2 == "" or input2 == search_input2):
+                matching_entries.append((output1, output2))
+    return matching_entries[:3] # return only the first 3 search results
 
 # Define the Streamlit app
+import streamlit as st
+
 def main():
     st.write("<h4 style='text-align: center;'>REGISTER TROOP COMP/FORM COUNTER</h4>", unsafe_allow_html=True)
     st.write("")
@@ -68,10 +66,12 @@ def main():
     search_button = st.button("Search")
 
     if search_button:
-        found_output1, found_output2 = search_data(search_input1, search_input2)
-        if found_output1 and found_output2:
-            st.success(f"Suggested Comp: {found_output1}")
-            st.success(f"Suggested Formation: {found_output2}")
+        matching_entries = search_data(search_input1, search_input2)
+        if matching_entries:
+            st.success("Matching entries:")
+            for i, entry in enumerate(matching_entries[:3]):
+                st.success(f"{i+1}. Suggested Comp: {entry[0]}")
+                st.success(f"Suggested Formation: {entry[1]}")
         else:
             st.warning("Data not found")
         st.button("Reset")
@@ -88,7 +88,6 @@ if __name__ == "__main__":
 
 
 
-import streamlit as st
 
 st.write("<h4 style='text-align: center;'>Donation</h4>", unsafe_allow_html=True)
 
