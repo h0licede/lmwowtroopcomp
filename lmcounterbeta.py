@@ -81,22 +81,15 @@ if __name__ == "__main__":
 
 import streamlit as st
 
-st.title("My Awesome Donation Page")
-
-st.header("Hello kind stranger!")
-st.subheader("If you enjoy using my program, please consider fueling my coding with a coffee or two. ☕️")
-st.write("Your donations will help me stay up late and write better code. 😉")
-
-st.write("---")
-
-st.write("To donate, please click the button below:")
-
-st.write("")
-
-st.markdown('<center><form action="https://www.paypal.com/donate" method="post" target="_blank"> \
-            <input type="hidden" name="hosted_button_id" value="CGZCEX4YJQ8EG" /> \
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" \
-            border="0" name="submit" title="PayPal - The safer, easier way to pay online!" \
-            alt="Donate with PayPal button" /> \
-            <img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" /> \
-            </form></center>', unsafe_allow_html=True)
+st.write("""
+    <div style='text-align: center'>
+        <h1>Hello everyone!</h1>
+        <p>Your donation would greatly help improve this program and keep me fueled with coffee while working on it.</p>
+        <p>But seriously, without coffee, this program wouldn't exist. So please consider donating to my coffee fund!</p>
+        <form action="https://www.paypal.com/donate" method="post" target="_top">
+            <input type="hidden" name="hosted_button_id" value="CGZCEX4YJQ8EG" />
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+            <img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
+        </form>
+    </div>
+""", unsafe_allow_html=True)
