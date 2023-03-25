@@ -126,7 +126,7 @@ st.sidebar.write("If you find any inaccurate troop comp and formation suggestion
 st.sidebar.markdown("---")
 
 # Add some additional information to the sidebar
-st.sidebar.write("This app is provided as a starting guideline for improving your gameplay. Please note that the suggested troop comps and formations may not always be accurate.")
+st.sidebar.write("While this app can serve as a useful starting point for enhancing your gameplay, it's important to keep in mind that the troop compositions and formations recommended may not be entirely precise. Ultimately, the effectiveness of your strategy will depend on various factors, such as your individual account stats and the opponent.")
   
 
 import streamlit as st
