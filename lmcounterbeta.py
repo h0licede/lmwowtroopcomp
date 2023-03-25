@@ -81,15 +81,8 @@ if __name__ == "__main__":
 
 import streamlit as st
 
-st.write("""
-    <div style='text-align: center'>
-        <h1>Hello everyone!</h1>
-        <p>Your donation would greatly help improve this program and keep me fueled with coffee while working on it.</p>
-        <p>But seriously, without coffee, this program wouldn't exist. So please consider donating to my coffee fund!</p>
-        <form action="https://www.paypal.com/donate" method="post" target="_top">
-            <input type="hidden" name="hosted_button_id" value="CGZCEX4YJQ8EG" />
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-            <img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
-        </form>
-    </div>
-""", unsafe_allow_html=True)
+st.title("My Streamlit App")
+
+st.write("If you're feeling generous and want to support my caffeine addiction while I work on this project, consider donating to my coffee fund. I promise I'll use it to stay awake and make more cool stuff 😜.")
+
+st.markdown('<div style="text-align:center"><a href="https://paypal.me/h0licede" target="_blank" rel="noopener noreferrer">Please consider donating to my coffee fund to support my work</a></div>', unsafe_allow_html=True)
