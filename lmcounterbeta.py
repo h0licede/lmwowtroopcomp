@@ -84,11 +84,11 @@ if __name__ == "__main__":
 
 import streamlit as st
 
-st.write("<h1 style='text-align: center;'>Donation</h1>", unsafe_allow_html=True)
+st.write("<h4 style='text-align: center;'>Donation</h1>", unsafe_allow_html=True)
 
 import streamlit as st
 
-st.write("<h1 style='text-align: center;'>If you're feeling generous and want to support my caffeine addiction while I work on this project, consider donating to my coffee fund. I promise I'll use it to stay awake and make more cool stuff 😜</h1>", unsafe_allow_html=True)
+st.write("<h4 style='text-align: center;'>If you're feeling generous and want to support my caffeine addiction while I work on this project, consider donating to my coffee fund. I promise I'll use it to stay awake and make more cool stuff 😜</h1>", unsafe_allow_html=True)
 
 
 st.markdown('<div style="text-align:center"><a href="https://paypal.me/h0licede" target="_blank" rel="noopener noreferrer">Please consider donating to my coffee fund to support my work</a></div>', unsafe_allow_html=True)
