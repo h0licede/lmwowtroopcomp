@@ -42,7 +42,7 @@ def search_data(search_input1, search_input2):
             input1, input2, output1, output2 = line.strip().split(",")
             if input1 == search_input1 and (search_input2 == "" or input2 == search_input2):
                 matching_entries.append((output1, output2))
-    return matching_entries[:10] # return only the first 10 search results
+    return matching_entries[:3] # return only the first 3 search results
 
 # Define the Streamlit app
 import streamlit as st
