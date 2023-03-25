@@ -43,6 +43,8 @@ def search_data(search_input1, search_input2):
 
 
 st.write("")
+st.write("")
+st.write("")
 
 # Define the Streamlit app
 def main():
