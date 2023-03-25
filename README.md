@@ -1,5 +1,5 @@
 LORDS MOBILE WOW TROOP COMP
-Welcome to LORDS MOBILE WOW TROOP COMP, a tool designed to help Lords Mobile gamers experienced in leading rallies in World of Wonder, Baron, etc. to get suggestions on what troop compositions to use to counter their enemy's composition and what formations are best suited for their individual stats.
+This app is designed specifically for inexperienced / experienced Lords Mobile gamers who lead rallies in World of Wonder, Baron, etc. Using our easy-to-use input functions, you can register and save data on enemy compositions and the troop compositions and formations that you used to counter them. The app uses this registered data to suggest the most common troop compositions and formations used to counter a given enemy composition. The search results show the three most common registered entries for each enemy composition and formation combination.
 
 How to Use
 Enter the enemy's troop composition in the "Enemy Comp" field.
@@ -20,9 +20,8 @@ If saved values are found, the suggested troop composition and formation will be
 
 If no values are found, a warning message will be displayed.
 
-Click the "Reset" button to clear all input fields and start again.
 
 Support
-If you have any questions or concerns, please contact us at support@accesstv.live.
+If you have any questions or concerns, please contact me at support@accesstv.live.
 
 
