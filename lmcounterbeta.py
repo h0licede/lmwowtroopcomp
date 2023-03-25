@@ -8,8 +8,6 @@ st.title("LORDS MOBILE WOW TROOP COMP")
 import streamlit as st
 
 
-st.write("<h4 style='font-size: 14px; text-align: center;'>This app is designed specifically for inexperienced / experienced Lords Mobile gamers who lead rallies in World of Wonder, Baron, etc. Using our easy-to-use input functions, you can register and save data on enemy compositions and the troop compositions and formations that you used to counter them. The app uses this registered data to suggest the most common troop compositions and formations used to counter a given enemy composition. The search results show the 10 most common registered entries for each suggested composition and formation combination.</h4>", unsafe_allow_html=True)
-
 
 
 
