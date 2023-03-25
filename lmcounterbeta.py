@@ -7,7 +7,7 @@ st.set_page_config(page_title="LORDS MOBILE WOW TROOP COMP")
 st.title("LORDS MOBILE WOW TROOP COMP")
 import streamlit as st
 
-st.write("<h1 style='text-align: center;'>This app is designed specifically for Lords Mobile gamers experienced in leading rallies in World of Wonder, Baron, etc. With our easy-to-use input functions, you can get suggestions on what troop comps to use to counter your enemy's composition and what formations are best suited for your individual stats.</h1>", unsafe_allow_html=True)
+st.write("<h4 style='text-align: center;'>This app is designed specifically for Lords Mobile gamers experienced in leading rallies in World of Wonder, Baron, etc. With our easy-to-use input functions, you can get suggestions on what troop comps to use to counter your enemy's composition and what formations are best suited for your individual stats.</h1>", unsafe_allow_html=True)
 
 
 
