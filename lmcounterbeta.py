@@ -82,6 +82,25 @@ if __name__ == "__main__":
 
 
 
+import streamlit as st
+import pandas as pd
+
+# Read the data from file
+data = pd.read_csv("data.txt", delimiter="\t")
+
+# Get the most common suggested comps and formations
+suggested_comps = data["Suggested Comp"].value_counts().nlargest(1).index[0]
+suggested_formations = data["Suggested Formation"].value_counts().nlargest(1).index[0]
+
+# Define a function to highlight the most common values
+def highlight_most_common(s):
+    is_suggested_comp = s == suggested_comps
+    is_suggested_formation = s == suggested_formations
+    return ["background-color: yellow" if v else "" for v in (is_suggested_comp | is_suggested_formation)]
+
+# Create the data table with highlighted cells
+st.write("Data Table:")
+st.dataframe(data.style.apply(highlight_most_common, axis=1))
 
 
 
