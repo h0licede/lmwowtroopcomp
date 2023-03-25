@@ -71,3 +71,26 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+import streamlit as st
+
+st.write("Hello everyone! Your donation would greatly help improve this program and keep me fueled with coffee while working on it.")
+
+paypal_button = '''
+<div style="text-align: center;">
+  <form action="https://www.paypal.com/donate" method="post" target="_top">
+    <input type="hidden" name="hosted_button_id" value="CGZCEX4YJQ8EG" />
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+    <img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
+  </form>
+</div>
+'''
+
+st.markdown(paypal_button, unsafe_allow_html=True)
