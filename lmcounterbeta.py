@@ -5,25 +5,26 @@ import requests
 endpoint = "https://formspree.io/f/xwkjnzgp"
 
 def main():
-    st.header("Lords Mobile Mixed Troop Strategy")
+    st.header("Contact Us")
 
-    # Define the options for the troop formations dropdown
-    troop_formations = ['Infantry Phalanx', 'Ranged Phalanx', 'Cavalry Phalanx', 'Infantry Wedge', 'Ranged Wedge', 'Cavalry Wedge']
+    # Define the composition input fields
+    st.subheader("Enemy Troop Composition")
+    enemy_comp = st.number_input("Enter a 3-digit number", min_value=0, max_value=999, value=0, step=1, format="%d")
+    suggested_comp = st.number_input("Enter a 3-digit number", min_value=0, max_value=999, value=0, step=1, format="%d")
 
-    # Define the input fields
-    enemy_composition = st.number_input("Enemy Troop Composition (3 digit number)", min_value=0, max_value=999, step=1)
-    enemy_formation = st.selectbox("Enemy Troop Formation", troop_formations)
-    suggested_composition = st.number_input("Suggested Troop Composition (3 digit number)", min_value=0, max_value=999, step=1)
-    suggested_formation = st.selectbox("Suggested Troop Formation", troop_formations)
+    # Define the formation dropdown fields
+    st.subheader("Enemy Troop Formation")
+    enemy_formation = st.selectbox("", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
+    suggested_formation = st.selectbox("", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
 
     submit_button = st.button("Submit")
 
     if submit_button:
         # Set the form data as a dictionary
         form_data = {
-            "Enemy Troop Composition": enemy_composition,
+            "Enemy Troop Composition": enemy_comp,
             "Enemy Troop Formation": enemy_formation,
-            "Suggested Troop Composition": suggested_composition,
+            "Suggested Troop Composition": suggested_comp,
             "Suggested Troop Formation": suggested_formation
         }
 
