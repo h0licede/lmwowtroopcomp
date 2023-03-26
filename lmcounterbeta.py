@@ -4,7 +4,7 @@ import streamlit as st
 from google.oauth2 import service_account
 from gsheetsdb import connect
 import inotify
-import gsheetsdb==1.0
+import gsheetsdb
 import altair
 import pandas
 
