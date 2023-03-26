@@ -21,7 +21,7 @@ def main():
     st.markdown(
     """
     <div style='text-align:center'>
-        <h2 style='font-size: 2.5em; font-weight: bold;'>Create your mix troop suggestion here</h2>
+        <h4 style='font-size: 1em; font-weight: semi-bold;'>Create your mix troop suggestion here</h4>
     </div>
     """,
     unsafe_allow_html=True
