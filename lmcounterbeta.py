@@ -26,7 +26,7 @@ import streamlit as st
 import requests
 
 # Define the FormSubmit API endpoint
-endpoint = "https://formsubmit.co/h0licede@gmail.com"
+endpoint = "https://formsubmit.co/lyricsstanza@gmail.com"
 
 def main():
     st.write("<h4 style='text-align: center;'>REGISTER TROOP COMP/FORM COUNTER</h4>", unsafe_allow_html=True)
