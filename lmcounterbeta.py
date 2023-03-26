@@ -171,45 +171,48 @@ st.markdown(
 
 
 
-import streamlit as st
+import streamlit as st  # pip install streamlit
 
-st.header("Troop Composition Form")
+st.header(":mailbox: Get In Touch With Me!")
 
-# Create dictionary to map formation choices to their corresponding string values
-formation_choices = {
-    "infantry phalanx": "Infantry Phalanx",
-    "ranged phalanx": "Ranged Phalanx",
-    "cavalry phalanx": "Cavalry Phalanx",
-    "infantry wedge": "Infantry Wedge",
-    "ranged wedge": "Ranged Wedge",
-    "cavalry wedge": "Cavalry Wedge"
-}
+contact_form = """
+<form action="https://formsubmit.co/support@accesstv.live" method="POST">
+     <input type="hidden" name="_captcha" value="false">
+     <input type="text" name="name" placeholder="Your name" required>
+     <input type="email" name="email" placeholder="Your email" required>
+     <label for="enemy_troop_comp">Enter enemy troop composition (3 numerical values separated by commas):</label><br>
+     <input type="text" name="enemy_troop_comp" pattern="[0-9]+,[0-9]+,[0-9]+" title="Please enter 3 numerical values separated by commas" required><br>
+     <label for="enemy_formation">Enter enemy formation:</label><br>
+     <select name="enemy_formation" id="enemy_formation" required>
+         <option value="" disabled selected>Select an option</option>
+         <option value="infantry_phalanx">Infantry Phalanx</option>
+         <option value="ranged_phalanx">Ranged Phalanx</option>
+         <option value="cavalry_phalanx">Cavalry Phalanx</option>
+         <option value="infantry_wedge">Infantry Wedge</option>
+         <option value="ranged_wedge">Ranged Wedge</option>
+         <option value="cavalry_wedge">Cavalry Wedge</option>
+     </select><br><br>
+     <label for="suggested_troop_comp">Enter suggested troop composition (3 numerical values separated by commas):</label><br>
+     <input type="text" name="suggested_troop_comp" pattern="[0-9]+,[0-9]+,[0-9]+" title="Please enter 3 numerical values separated by commas" required><br>
+     <label for="suggested_formation">Enter suggested formation:</label><br>
+     <select name="suggested_formation" id="suggested_formation" required>
+         <option value="" disabled selected>Select an option</option>
+         <option value="infantry_phalanx">Infantry Phalanx</option>
+         <option value="ranged_phalanx">Ranged Phalanx</option>
+         <option value="cavalry_phalanx">Cavalry Phalanx</option>
+         <option value="infantry_wedge">Infantry Wedge</option>
+         <option value="ranged_wedge">Ranged Wedge</option>
+         <option value="cavalry_wedge">Cavalry Wedge</option>
+     </select><br><br>
+     <button type="submit">Send</button>
+</form>
+"""
 
-# Define function to convert formation choice to string value
-def get_formation_string(formation_choice):
-    return formation_choices.get(formation_choice, "")
+st.markdown(contact_form, unsafe_allow_html=True)
 
-# Define form inputs
-enemy_troop_comp = st.text_input("Enemy Troop Composition (3 numerical values, e.g. 424)")
-enemy_formation = st.selectbox("Enemy Formation", list(formation_choices.keys()))
-suggested_troop_comp = st.text_input("Suggested Troop Composition (3 numerical values, e.g. 208)")
-suggested_formation = st.selectbox("Suggested Formation", list(formation_choices.keys()))
+# Use Local CSS File
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# Define function to format data as string for email
-def format_data():
-    enemy_formation_string = get_formation_string(enemy_formation)
-    suggested_formation_string = get_formation_string(suggested_formation)
-    data_string = f"{enemy_troop_comp},{enemy_formation_string},{suggested_troop_comp},{suggested_formation_string}"
-    return data_string
-
-# Define email submission button
-if st.button("Submit"):
-    # Format data as string
-    data_string = format_data()
-    # Send email with data
-    st.write(f"Email sent with data: {data_string}")
-    # Clear form inputs
-    enemy_troop_comp = ""
-    enemy_formation = ""
-    suggested_troop_comp = ""
-    suggested_formation = ""
+local_css("style/style.css")
