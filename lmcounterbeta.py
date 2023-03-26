@@ -173,38 +173,19 @@ st.markdown(
 
 import streamlit as st  # pip install streamlit
 
-st.header(":mailbox: Get In Touch With Me!")
+st.title("LM Counter Beta")
 
+st.write("Enter Enemy Troop Composition and Formation in 3 numerical values:")
+col1, col2 = st.beta_columns(2)
+enemy_troop_comp = col1.text_input("Enemy Troop Composition", max_chars=3)
+enemy_formation = col2.selectbox("Enemy Formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
 
-contact_form = """
-<form action="https://formsubmit.co/support@accesstv.live" method="POST">
-     <input type="hidden" name="_captcha" value="false">
-     <label for="enemy_troop_comp">Enemy Troop Comp (3 numerical values):</label>
-     <input type="text" name="enemy_troop_comp" id="enemy_troop_comp" pattern="[0-9]{1,3},[0-9]{1,3},[0-9]{1,3}" title="Please enter 3 numerical values separated by commas" required>
-     <label for="enemy_formation">Enemy Formation:</label>
-     <select name="enemy_formation" id="enemy_formation" required>
-         <option value="">Choose an option</option>
-         <option value="infantry_phalanx">Infantry Phalanx</option>
-         <option value="ranged_phalanx">Ranged Phalanx</option>
-         <option value="cavalry_phalanx">Cavalry Phalanx</option>
-         <option value="infantry_wedge">Infantry Wedge</option>
-         <option value="ranged_wedge">Ranged Wedge</option>
-         <option value="cavalry_wedge">Cavalry Wedge</option>
-     </select>
-     <label for="suggested_troop_comp">Suggested Troop Comp (3 numerical values):</label>
-     <input type="text" name="suggested_troop_comp" id="suggested_troop_comp" pattern="[0-9]{1,3},[0-9]{1,3},[0-9]{1,3}" title="Please enter 3 numerical values separated by commas" required>
-     <label for="suggested_formation">Suggested Formation:</label>
-     <select name="suggested_formation" id="suggested_formation" required>
-         <option value="">Choose an option</option>
-         <option value="infantry_phalanx">Infantry Phalanx</option>
-         <option value="ranged_phalanx">Ranged Phalanx</option>
-         <option value="cavalry_phalanx">Cavalry Phalanx</option>
-         <option value="infantry_wedge">Infantry Wedge</option>
-         <option value="ranged_wedge">Ranged Wedge</option>
-         <option value="cavalry_wedge">Cavalry Wedge</option>
-     </select>
-     <button type="submit">Send</button>
-</form>
-"""
+st.write("Enter Suggested Troop Composition and Formation in 3 numerical values:")
+col1, col2 = st.beta_columns(2)
+suggested_troop_comp = col1.text_input("Suggested Troop Composition", max_chars=3)
+suggested_formation = col2.selectbox("Suggested Formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
 
-st.markdown(contact_form, unsafe_allow_html=True)
+if st.button("Submit"):
+    output = f"{enemy_troop_comp},{enemy_formation},{suggested_troop_comp},{suggested_formation}"
+    st.write("Output:", output)
+
