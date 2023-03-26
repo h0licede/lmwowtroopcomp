@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Define the Formspree API endpoint
-endpoint = "https://formspree.io/f/lyricsstanza@gmail.com"
+endpoint = "https://formspree.io/f/xwkjnzgp"
 
 def main():
     st.header("Contact Us")
