@@ -43,30 +43,49 @@ if __name__ == "__main__":
     
 import streamlit as st
 
-def search_suggested_composition(data, enemy_composition, enemy_formation):
-    for row in data:
-        if row[0] == enemy_composition and row[1] == enemy_formation:
-            return row[2], row[3]
-    return "No suggestion found for the given enemy composition and formation.", ""
-
-def main():
-    st.header("Search for Suggested Troop Composition and Formation")
-
-    # Load data from file
+# Read data from file
+def read_data():
     with open("data.txt", "r") as f:
-        data = [line.strip().split(",") for line in f]
+        lines = f.readlines()
+    data = []
+    for line in lines:
+        line = line.strip()
+        if line:
+            values = line.split(",")
+            data.append((values[0], values[1], values[2], values[3]))
+    return data
 
-    # Get user inputs
-    enemy_composition = st.text_input("Enter enemy troop composition (3 digits)", max_chars=3)
-    enemy_formation = st.selectbox("Select enemy troop formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
+# Search for matching results
+def search_data(data, enemy_comp, enemy_form):
+    matches = []
+    for d in data:
+        if d[0] == enemy_comp and d[1] == enemy_form:
+            matches.append((d[2], d[3]))
+    return matches
+
+# Main function
+def main():
+    st.header("Troop Search")
+
+    # Read data from file
+    data = read_data()
+
+    # Get user input
+    enemy_comp = st.text_input("Enter enemy troop composition (3-digit number)")
+    enemy_form = st.selectbox("Select enemy troop formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
     search_button = st.button("Search")
 
-    # Search for suggested composition and formation if search button is pressed
+    # Show results if search button is clicked
     if search_button:
-        suggested_composition, suggested_formation = search_suggested_composition(data, enemy_composition, enemy_formation)
-        st.write(f"Suggested troop composition: {suggested_composition}")
-        st.write(f"Suggested troop formation: {suggested_formation}")
+        matches = search_data(data, enemy_comp, enemy_form)
+        if matches:
+            st.success("Matching results:")
+            for m in matches:
+                st.write(f"Suggested troop composition: {m[0]}, Suggested troop formation: {m[1]}")
+        else:
+            st.warning("No matching results found.")
 
 if __name__ == "__main__":
     main()
+
 
