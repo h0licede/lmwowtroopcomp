@@ -45,8 +45,8 @@ if submit:
     # Save the dataframe to a CSV file
     df.to_csv('troop_comps.csv', index=False)
     # Authenticate with GitHub
-    g = Github("GITHUB_ACCESS_TOKEN")
-    repo = g.get_repo("USERNAME/REPO_NAME")
+    g = Github("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")
+    repo = g.get_repo("h0licede/lmwowtroopcomp")
     # Create a new file in the repository with the updated data
     contents = repo.get_contents('troop_comps.csv')
     repo.update_file(contents.path, "Update troop comps data", df.to_csv(index=False), contents.sha)
