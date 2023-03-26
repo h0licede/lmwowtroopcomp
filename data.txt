@@ -1,4 +1,1 @@
-424,Ranged Phalanx,055,Infantry Wedge
-424,Ranged Phalanx,208,Infantry Phalanx
-424,Ranged Phalanx,424,Cavalry Phalanx
-424,Ranged Phalanx,749,Ranged Phalanx
+
