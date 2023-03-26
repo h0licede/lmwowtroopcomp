@@ -1,2 +1,2 @@
-
-
+inotify
+gsheetsdb==1.0
