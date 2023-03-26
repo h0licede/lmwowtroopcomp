@@ -1,39 +1,18 @@
 import streamlit as st
+import os
 
 # Set page title
 st.set_page_config(page_title="LORDS MOBILE WOW TROOP COMP")
 
-# Add a title and subtitle
-st.title("LORDS MOBILE WOW TROOP COMP")
-import streamlit as st
-
-
-
-
-
-st.write("")
-st.write("")
-st.write("")
-
-
-
-
-
-
-
-
-import streamlit as st
-
 # Define the filename where input/output values will be saved
-filename = "data.txt"
-
 filename = "data.txt"
 
 def save_data(input1, input2, output1, output2):
     existing_data = []
-    with open(filename, "r") as f:
-        existing_data = [line.strip().split(",") for line in f.readlines()]
-        
+    if os.path.exists(filename):
+        with open(filename, "r") as f:
+            existing_data = [line.strip().split(",") for line in f.readlines()]
+
     data_to_save = [input1, input2, output1, output2]
     overwrite = False
     
@@ -76,6 +55,9 @@ def search_data(search_input1, search_input2):
 import streamlit as st
 
 def main():
+    # Clone the repository
+    os.system("git clone https://github.com/holicede/lmwowtroopcomp.git")
+
     st.write("<h4 style='text-align: center;'>REGISTER TROOP COMP/FORM COUNTER</h4>", unsafe_allow_html=True)
     st.write("")
 
@@ -87,23 +69,8 @@ def main():
 
     if save_button:
         save_data(input1, input2, output1, output2)
+        os.system("cd h0licede/lmwowtroopcomp && git add data.txt && git commit -m 'Add input and output values' && git push origin main")
         st.success("Data saved")
-        st.button("Reset")
-
-    st.write("<h4 style='text-align: center;'>SUGGESTED TROOP COMP/FORM COUNTER</h4>", unsafe_allow_html=True)
-    search_input1 = st.text_input("Enemy Comp", "", key="unique_key_1")
-    search_input2 = st.selectbox("Enemy Formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"], key="unique_key_2")
-    search_button = st.button("Search")
-
-    if search_button:
-        matching_entries = search_data(search_input1, search_input2)
-        if matching_entries:
-            st.success("Matching entries:")
-            for i, entry in enumerate(reversed(matching_entries[-10:])):
-                st.success(f"{len(matching_entries)-i}. Suggested Comp: {entry[0]}")
-                st.success(f"Suggested Formation: {entry[1]}")
-        else:
-            st.warning("Data not found")
         st.button("Reset")
 
 if __name__ == "__main__":
