@@ -1,5 +1,1 @@
-inotify
-gsheetsdb==1.0
-altair
-pandas
 streamlit
