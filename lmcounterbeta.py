@@ -13,7 +13,7 @@ def main():
     st.markdown(
     """
     <div style='text-align:center'>
-        <h1 style='font-size: 3em'>Create your mix troop suggestion here</h1>
+        <h1 style='font-size: 2em'>Create your mix troop suggestion here</h1>
     </div>
     """,
     unsafe_allow_html=True
