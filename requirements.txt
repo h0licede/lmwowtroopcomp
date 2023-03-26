@@ -2,3 +2,4 @@ streamlit
 google-auth
 gsheetsdb
 pyparsing
+requests
