@@ -18,7 +18,7 @@ st.write("<h4 style='text-align: center;'>This app is designed specifically for 
 
 import streamlit as st
 import pandas as pd
-from github import Github
+import git
 
 # Create a list of possible troop compositions and formations
 troop_comps = ['001', '002', '003', '004', '005']
@@ -44,12 +44,12 @@ if submit:
                    ignore_index=True)
     # Save the dataframe to a CSV file
     df.to_csv('troop_comps.csv', index=False)
-    # Authenticate with GitHub
-    g = Github("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")
-    repo = g.get_repo("h0licede/lmwowtroopcomp")
-    # Create a new file in the repository with the updated data
-    contents = repo.get_contents('troop_comps.csv')
-    repo.update_file(contents.path, "Update troop comps data", df.to_csv(index=False), contents.sha)
+    # Commit the CSV file to the Git repository
+    repo = git.Repo.init('.')
+    repo.index.add(['troop_comps.csv'])
+    repo.index.commit("Update troop comps data")
+    remote_origin = repo.remote(name='origin')
+    remote_origin.push()
 
 # Filter out duplicate rows and display the results
 df = df.drop_duplicates()
@@ -58,6 +58,7 @@ if not df.empty:
     st.dataframe(df)
 else:
     st.info("No results yet. Enter some troop compositions and formations.")
+
 
 
 
