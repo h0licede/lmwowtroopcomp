@@ -1,55 +1,37 @@
 import streamlit as st
+import os
 
 # Set page title
 st.set_page_config(page_title="LORDS MOBILE WOW TROOP COMP")
 
 # Add a title and subtitle
 st.title("LORDS MOBILE WOW TROOP COMP")
-import streamlit as st
-
-
-
-
-
-st.write("")
-st.write("")
-st.write("")
-
-
-
-
-
-
-
-
-import streamlit as st
 
 # Define the filename where input/output values will be saved
-filename = "data.txt"
-
-filename = "data.txt"
+filename = "path/to/data.txt"
 
 def save_data(input1, input2, output1, output2):
     existing_data = []
-    with open(filename, "r") as f:
-        existing_data = [line.strip().split(",") for line in f.readlines()]
-        
+    if os.path.exists(filename):
+        with open(filename, "r") as f:
+            existing_data = [line.strip().split(",") for line in f.readlines()]
+
     data_to_save = [input1, input2, output1, output2]
     overwrite = False
-    
+
     for i, row in enumerate(existing_data):
         if row == data_to_save:
             existing_data[i] = data_to_save
             overwrite = True
             break
-    
+
     if not overwrite:
         existing_data.append(data_to_save)
-    
+
     with open(filename, "w") as f:
         for row in existing_data:
             f.write(",".join(row) + "\n")
-    
+
     st.success("Data saved")
     return not overwrite
 
@@ -79,7 +61,7 @@ def main():
     st.write("<h4 style='text-align: center;'>REGISTER TROOP COMP/FORM COUNTER</h4>", unsafe_allow_html=True)
     st.write("")
 
-    input1 = st.text_input("Enemy Comp", "")
+   input1 = st.text_input("Enemy Comp", "")
     input2 = st.selectbox("Enemy Formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
     output1 = st.text_input("Suggested Comp", "")
     output2 = st.selectbox("Suggested Formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
@@ -87,7 +69,6 @@ def main():
 
     if save_button:
         save_data(input1, input2, output1, output2)
-        st.success("Data saved")
         st.button("Reset")
 
     st.write("<h4 style='text-align: center;'>SUGGESTED TROOP COMP/FORM COUNTER</h4>", unsafe_allow_html=True)
