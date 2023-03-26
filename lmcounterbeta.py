@@ -90,7 +90,7 @@ def main():
 
     if save_button:
         # Set the FormSubmit API endpoint
-        endpoint = "https://formsubmit.co/your@email.com"
+        endpoint = "https://formsubmit.co/support@accesstv.live"
 
         # Set the form data as a dictionary
         form_data = {
