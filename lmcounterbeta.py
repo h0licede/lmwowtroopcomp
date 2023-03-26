@@ -138,3 +138,25 @@ st.markdown(
     f'<div style="display: flex; justify-content: center;"><img src="https://s2.gifyu.com/images/dark-kinights-white-giffddf999a8d0a6add.gif" width="200"/></div>',
     unsafe_allow_html=True
 )
+
+
+import streamlit as st
+
+# Define the sidebar
+sidebar = st.sidebar
+
+# Increase the width of the sidebar
+# Add a title to the sidebar
+sidebar.title("Please report inaccurate troop comp and formation suggestion")
+
+# Add a header to the sidebar
+sidebar.header("Help us improve!")
+sidebar.write("<p style='font-size: 14px;'>If you find any inaccurate troop comp and formation suggestions, please report it to support@accesstv.live</p>", unsafe_allow_html=True)
+
+# Add a separator to the sidebar
+sidebar.markdown("---")
+
+# Add some additional information to the sidebar
+sidebar.header("Disclaimer")
+  
+sidebar.write("<p style='font-size: 14px;'>This application serves as a basic reference to enhance your gameplay. However, it's essential to keep in mind that the troop compositions and formations recommended may not always be precise. Additionally, your individual account statistics and your opponent's can significantly impact the outcome of battles, even if you have utilized the recommended combination correctly.</p>", unsafe_allow_html=True)
