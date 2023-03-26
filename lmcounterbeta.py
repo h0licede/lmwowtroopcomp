@@ -170,72 +170,86 @@ st.markdown(
 
 
 
+import streamlit as st
+import requests
 
-import streamlit as st  # pip install streamlit
+st.set_page_config(page_title="LM Counter", page_icon=":guardsman:", layout="wide")
 
-st.title("LM Wow Troop Comp Counter")
+# Define Troop Composition Labels
+troop_composition_labels = {
+    "infantry": "Infantry",
+    "ranged": "Ranged",
+    "cavalry": "Cavalry",
+}
 
-st.subheader("Enter Enemy Troop Comp and Formation")
+# Define Formation Labels
+formation_labels = {
+    "phalanx": "Phalanx",
+    "wedge": "Wedge",
+}
 
-# User input for enemy troop comp and formation
-enemy_troop_comp = st.selectbox("Enemy Troop Comp", ["Select Troop Comp", "Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
-enemy_formation = st.selectbox("Enemy Formation", ["Select Formation", "Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
+# Define Troop Composition Values
+troop_composition_values = {
+    "infantry": 1,
+    "ranged": 2,
+    "cavalry": 3,
+}
 
-st.subheader("Enter Your Troop Comp and Formation")
+# Define Formation Values
+formation_values = {
+    "phalanx": 1,
+    "wedge": 2,
+}
 
-# User input for suggested troop comp and formation
-suggested_troop_comp = st.selectbox("Suggested Troop Comp", ["Select Troop Comp", "Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
-suggested_formation = st.selectbox("Suggested Formation", ["Select Formation", "Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
-
-# Submit button with captcha
-if st.button("Submit"):
-    captcha = st.text_input("Enter the captcha below:")
-    if captcha == "1234":
-        # Format and send email
-        message = f"{enemy_troop_comp[:3].upper()},{enemy_formation[:3].upper()},{suggested_troop_comp[:3].upper()},{suggested_formation[:3].upper()}"
-        st.write(f"Sending email with message: {message}")
+# Define function to convert troop composition and formation inputs to numerical values
+def convert_input_to_value(input_str, input_dict):
+    input_str = input_str.lower()
+    if input_str in input_dict:
+        return input_dict[input_str]
     else:
-        st.write("Invalid captcha. Please try again.")
-        
-        # Reset dropdown values
-        enemy_troop_comp = "Select Troop Comp"
-        enemy_formation = "Select Formation"
-        suggested_troop_comp = "Select Troop Comp"
-        suggested_formation = "Select Formation"
+        return None
 
-# Center form
-st.markdown(
-    """
-    <style>
-    .center {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 60vh;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# Define function to convert numerical values to troop composition and formation labels
+def convert_value_to_label(value, label_dict):
+    if value in label_dict:
+        return label_dict[value]
+    else:
+        return None
 
-st.markdown('<div class="center">', unsafe_allow_html=True)
+# Define form
+def troop_comp_form():
+    st.write("Enter enemy troop composition and formation:")
+    with st.form(key="troop_comp_form"):
+        col1, col2 = st.beta_columns(2)
+        with col1:
+            infantry_input = st.number_input("Infantry", min_value=0, max_value=999, step=1)
+            ranged_input = st.number_input("Ranged", min_value=0, max_value=999, step=1)
+            cavalry_input = st.number_input("Cavalry", min_value=0, max_value=999, step=1)
+        with col2:
+            formation_input = st.selectbox("Formation", list(formation_labels.keys()))
+        if st.form_submit_button("Submit"):
+            # Get numerical values from inputs
+            infantry_value = convert_input_to_value("infantry", troop_composition_values)
+            ranged_value = convert_input_to_value("ranged", troop_composition_values)
+            cavalry_value = convert_input_to_value("cavalry", troop_composition_values)
+            formation_value = convert_input_to_value(formation_input, formation_values)
+            # Get troop composition and formation labels from numerical values
+            infantry_label = convert_value_to_label(infantry_value, troop_composition_labels)
+            ranged_label = convert_value_to_label(ranged_value, troop_composition_labels)
+            cavalry_label = convert_value_to_label(cavalry_value, troop_composition_labels)
+            formation_label = convert_value_to_label(formation_value, formation_labels)
+            # Format output string
+            output_str = f"{infantry_input},{ranged_input},{cavalry_input},{formation_label},{infantry_label} {ranged_label} {cavalry_label}"
+            # Submit form
+            try:
+                response = requests.post(
+                    "https://formsubmit.co/YOUR-EMAIL-HERE",
+                    headers={
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    },
+                    json={
+                        "name": "LM Counter Form",
+                        "message": output_str,
+                        "g-recaptcha-response": st.secrets["rec
 
-# Display enemy troop comp and formation dropdowns
-col1, col2 = st.beta_columns(2)
-with col1:
-    st.write("Enemy Troop Comp:")
-    st.write(enemy_troop_comp)
-with col2:
-    st.write("Enemy Formation:")
-    st.write(enemy_formation)
-
-# Display suggested troop comp and formation dropdowns
-col3, col4 = st.beta_columns(2)
-with col3:
-    st.write("Suggested Troop Comp:")
-    st.write(suggested_troop_comp)
-with col4:
-    st.write("Suggested Formation:")
-    st.write(suggested_formation)
-
-st.markdown('</div>', unsafe_allow_html=True)
