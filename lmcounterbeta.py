@@ -175,44 +175,36 @@ import streamlit as st  # pip install streamlit
 
 st.header(":mailbox: Get In Touch With Me!")
 
+
 contact_form = """
 <form action="https://formsubmit.co/support@accesstv.live" method="POST">
      <input type="hidden" name="_captcha" value="false">
-     <input type="text" name="name" placeholder="Your name" required>
-     <input type="email" name="email" placeholder="Your email" required>
-     <label for="enemy_troop_comp">Enter enemy troop composition (3 numerical values separated by commas):</label><br>
-     <input type="text" name="enemy_troop_comp" pattern="[0-9]+,[0-9]+,[0-9]+" title="Please enter 3 numerical values separated by commas" required><br>
-     <label for="enemy_formation">Enter enemy formation:</label><br>
+     <label for="enemy_troop_comp">Enemy Troop Comp (3 numerical values):</label>
+     <input type="text" name="enemy_troop_comp" id="enemy_troop_comp" pattern="[0-9]{1,3},[0-9]{1,3},[0-9]{1,3}" title="Please enter 3 numerical values separated by commas" required>
+     <label for="enemy_formation">Enemy Formation:</label>
      <select name="enemy_formation" id="enemy_formation" required>
-         <option value="" disabled selected>Select an option</option>
+         <option value="">Choose an option</option>
          <option value="infantry_phalanx">Infantry Phalanx</option>
          <option value="ranged_phalanx">Ranged Phalanx</option>
          <option value="cavalry_phalanx">Cavalry Phalanx</option>
          <option value="infantry_wedge">Infantry Wedge</option>
          <option value="ranged_wedge">Ranged Wedge</option>
          <option value="cavalry_wedge">Cavalry Wedge</option>
-     </select><br><br>
-     <label for="suggested_troop_comp">Enter suggested troop composition (3 numerical values separated by commas):</label><br>
-     <input type="text" name="suggested_troop_comp" pattern="[0-9]+,[0-9]+,[0-9]+" title="Please enter 3 numerical values separated by commas" required><br>
-     <label for="suggested_formation">Enter suggested formation:</label><br>
+     </select>
+     <label for="suggested_troop_comp">Suggested Troop Comp (3 numerical values):</label>
+     <input type="text" name="suggested_troop_comp" id="suggested_troop_comp" pattern="[0-9]{1,3},[0-9]{1,3},[0-9]{1,3}" title="Please enter 3 numerical values separated by commas" required>
+     <label for="suggested_formation">Suggested Formation:</label>
      <select name="suggested_formation" id="suggested_formation" required>
-         <option value="" disabled selected>Select an option</option>
+         <option value="">Choose an option</option>
          <option value="infantry_phalanx">Infantry Phalanx</option>
          <option value="ranged_phalanx">Ranged Phalanx</option>
          <option value="cavalry_phalanx">Cavalry Phalanx</option>
          <option value="infantry_wedge">Infantry Wedge</option>
          <option value="ranged_wedge">Ranged Wedge</option>
          <option value="cavalry_wedge">Cavalry Wedge</option>
-     </select><br><br>
+     </select>
      <button type="submit">Send</button>
 </form>
 """
 
 st.markdown(contact_form, unsafe_allow_html=True)
-
-# Use Local CSS File
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-local_css("style/style.css")
