@@ -43,41 +43,30 @@ if __name__ == "__main__":
     
 import streamlit as st
 
-def get_suggestions(composition, formation):
-    with open('data.txt', 'r') as f:
-        lines = f.readlines()
-
-    matching_results = []
-    for line in lines:
-        parts = line.strip().split(',')
-        if parts[0] == composition and parts[1] == formation:
-            matching_results.append((parts[2], parts[3]))
-
-    return matching_results
+def search_suggested_composition(data, enemy_composition, enemy_formation):
+    for row in data:
+        if row[0] == enemy_composition and row[1] == enemy_formation:
+            return row[2], row[3]
+    return "No suggestion found for the given enemy composition and formation.", ""
 
 def main():
-    st.header('Troop Suggestions')
+    st.header("Search for Suggested Troop Composition and Formation")
 
-    # Get user input for enemy composition
-    composition = st.text_input('Enemy Troop Composition', max_chars=3)
+    # Load data from file
+    with open("data.txt", "r") as f:
+        data = [line.strip().split(",") for line in f]
 
-    # Get user input for enemy formation
-    formation_options = ['Infantry Phalanx', 'Ranged Phalanx', 'Cavalry Phalanx', 'Infantry Wedge', 'Ranged Wedge', 'Cavalry Wedge']
-    formation = st.selectbox('Enemy Troop Formation', formation_options)
+    # Get user inputs
+    enemy_composition = st.text_input("Enter enemy troop composition (3 digits)", max_chars=3)
+    enemy_formation = st.selectbox("Select enemy troop formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
+    search_button = st.button("Search")
 
-    # Get suggestions if search button is clicked
-    if st.button('Search'):
-        # Get matching results
-        matching_results = get_suggestions(composition, formation)
-        
-        # Display matching results
-        if matching_results:
-            st.subheader('Suggested Troop Compositions and Formations:')
-            for result in matching_results:
-                st.write(f'Composition: {result[0]}, Formation: {result[1]}')
-        else:
-            st.write('No matching results found.')
+    # Search for suggested composition and formation if search button is pressed
+    if search_button:
+        suggested_composition, suggested_formation = search_suggested_composition(data, enemy_composition, enemy_formation)
+        st.write(f"Suggested troop composition: {suggested_composition}")
+        st.write(f"Suggested troop formation: {suggested_formation}")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
 
