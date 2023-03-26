@@ -5,7 +5,15 @@ import requests
 endpoint = "https://formspree.io/f/xwkjnzgp"
 
 def main():
-    st.title("Lords Mobile Mix Troop Strategy")
+    st.markdown(
+    """
+    <div style='text-align:center'>
+        <h1 style='font-size: 3em; font-weight: bold;'>Lords Mobile Mix Troop Strategy</h1>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
     
     st.write("")
     st.write("")
