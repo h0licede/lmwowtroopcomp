@@ -161,7 +161,7 @@ st.write("")
 
 
 st.markdown(
-    f'<div style="display: flex; justify-content: center;"><img src="https://s2.gifyu.com/images/dark-kinights-white-giffddf999a8d0a6add.gif" width="250"/></div>',
+    f'<div style="display: flex; justify-content: center;"><img src="https://s2.gifyu.com/images/dark-kinights-white-giffddf999a8d0a6add.gif" width="220"/></div>',
     unsafe_allow_html=True
 )
 
