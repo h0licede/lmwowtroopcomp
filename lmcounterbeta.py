@@ -173,19 +173,69 @@ st.markdown(
 
 import streamlit as st  # pip install streamlit
 
-st.title("LM WoW Troop Comp")
+st.title("LM Wow Troop Comp Counter")
 
-st.write("Type the enemy troop comp and enemy formation in 3 numerical values with the choices of Infantry Phalanx, Ranged Phalanx, Cavalry Phalanx, Infantry Wedge, Ranged Wedge, Cavalry Wedge. ")
+st.subheader("Enter Enemy Troop Comp and Formation")
 
-contact_form = """
-<form action="https://formsubmit.co/support@accesstv.live" method="POST">
-     <input type="hidden" name="_captcha" value="true">
-     <input type="text" name="enemy_troop_comp" placeholder="Enemy Troop Comp" required>
-     <input type="text" name="enemy_formation" placeholder="Enemy Formation" required>
-     <input type="text" name="suggested_troop_comp" placeholder="Suggested Troop Comp" required>
-     <input type="text" name="suggested_formation" placeholder="Suggested Formation" required>
-     <button type="submit">Submit</button>
-</form>
-"""
+# User input for enemy troop comp and formation
+enemy_troop_comp = st.selectbox("Enemy Troop Comp", ["Select Troop Comp", "Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
+enemy_formation = st.selectbox("Enemy Formation", ["Select Formation", "Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
 
-st.markdown(contact_form, unsafe_allow_html=True)
+st.subheader("Enter Your Troop Comp and Formation")
+
+# User input for suggested troop comp and formation
+suggested_troop_comp = st.selectbox("Suggested Troop Comp", ["Select Troop Comp", "Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
+suggested_formation = st.selectbox("Suggested Formation", ["Select Formation", "Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
+
+# Submit button with captcha
+if st.button("Submit"):
+    captcha = st.text_input("Enter the captcha below:")
+    if captcha == "1234":
+        # Format and send email
+        message = f"{enemy_troop_comp[:3].upper()},{enemy_formation[:3].upper()},{suggested_troop_comp[:3].upper()},{suggested_formation[:3].upper()}"
+        st.write(f"Sending email with message: {message}")
+    else:
+        st.write("Invalid captcha. Please try again.")
+        
+        # Reset dropdown values
+        enemy_troop_comp = "Select Troop Comp"
+        enemy_formation = "Select Formation"
+        suggested_troop_comp = "Select Troop Comp"
+        suggested_formation = "Select Formation"
+
+# Center form
+st.markdown(
+    """
+    <style>
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60vh;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown('<div class="center">', unsafe_allow_html=True)
+
+# Display enemy troop comp and formation dropdowns
+col1, col2 = st.beta_columns(2)
+with col1:
+    st.write("Enemy Troop Comp:")
+    st.write(enemy_troop_comp)
+with col2:
+    st.write("Enemy Formation:")
+    st.write(enemy_formation)
+
+# Display suggested troop comp and formation dropdowns
+col3, col4 = st.beta_columns(2)
+with col3:
+    st.write("Suggested Troop Comp:")
+    st.write(suggested_troop_comp)
+with col4:
+    st.write("Suggested Formation:")
+    st.write(suggested_formation)
+
+st.markdown('</div>', unsafe_allow_html=True)
