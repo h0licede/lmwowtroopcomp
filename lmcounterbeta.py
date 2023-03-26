@@ -173,19 +173,19 @@ st.markdown(
 
 import streamlit as st  # pip install streamlit
 
-st.title("LM Counter Beta")
+st.title("LM WoW Troop Comp")
 
-st.write("Enter Enemy Troop Composition and Formation in 3 numerical values:")
-col1, col2 = st.beta_columns(2)
-enemy_troop_comp = col1.text_input("Enemy Troop Composition", max_chars=3)
-enemy_formation = col2.selectbox("Enemy Formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
+st.write("Type the enemy troop comp and enemy formation in 3 numerical values with the choices of Infantry Phalanx, Ranged Phalanx, Cavalry Phalanx, Infantry Wedge, Ranged Wedge, Cavalry Wedge. ")
 
-st.write("Enter Suggested Troop Composition and Formation in 3 numerical values:")
-col1, col2 = st.beta_columns(2)
-suggested_troop_comp = col1.text_input("Suggested Troop Composition", max_chars=3)
-suggested_formation = col2.selectbox("Suggested Formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
+contact_form = """
+<form action="https://formsubmit.co/support@accesstv.live" method="POST">
+     <input type="hidden" name="_captcha" value="true">
+     <input type="text" name="enemy_troop_comp" placeholder="Enemy Troop Comp" required>
+     <input type="text" name="enemy_formation" placeholder="Enemy Formation" required>
+     <input type="text" name="suggested_troop_comp" placeholder="Suggested Troop Comp" required>
+     <input type="text" name="suggested_formation" placeholder="Suggested Formation" required>
+     <button type="submit">Submit</button>
+</form>
+"""
 
-if st.button("Submit"):
-    output = f"{enemy_troop_comp},{enemy_formation},{suggested_troop_comp},{suggested_formation}"
-    st.write("Output:", output)
-
+st.markdown(contact_form, unsafe_allow_html=True)
