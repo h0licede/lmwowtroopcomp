@@ -1,5 +1,24 @@
 import streamlit as st
 
+from github import Github
+
+# Authenticate with your access token
+g = Github("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")
+
+# Get the repository you want to use
+repo = g.get_user().get_repo("h0licede/lmwowtroopcomp")
+
+# Get the file you want to update
+file = repo.get_contents("data.txt")
+
+# Define the new content to be saved in the file
+new_content = "New register to add to data.txt"
+
+# Update the file with the new content
+repo.update_file(file.path, "Adding new register to data.txt", new_content, file.sha)
+
+
+
 # Set page title
 st.set_page_config(page_title="LORDS MOBILE WOW TROOP COMP")
 
