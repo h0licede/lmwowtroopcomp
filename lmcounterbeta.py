@@ -30,29 +30,15 @@ filename = "data.txt"
 filename = "data.txt"
 
 def save_data(input1, input2, output1, output2):
-    existing_data = []
-    with open(filename, "r") as f:
-        existing_data = [line.strip().split(",") for line in f.readlines()]
-        
-    data_to_save = [input1, input2, output1, output2]
-    overwrite = False
+    # Write the data to the file
+    with open(filename, "a") as f:
+        f.write(f"{input1},{input2},{output1},{output2}\n")
     
-    for i, row in enumerate(existing_data):
-        if row == data_to_save:
-            existing_data[i] = data_to_save
-            overwrite = True
-            break
-    
-    if not overwrite:
-        existing_data.append(data_to_save)
-    
-    with open(filename, "w") as f:
-        for row in existing_data:
-            f.write(",".join(row) + "\n")
-    
-    st.success("Data saved")
-    return not overwrite
-
+    # Send a message to the Telegram chat
+    bot = telegram.Bot(token="6004011324:AAFv5wvhaYp48lBXtR5Z8P67ikL4dgDUndg")
+    chat_id = "@accesstvlive"
+    message = f"New data saved: {input1}, {input2}, {output1}, {output2}"
+    bot.send_message(chat_id=chat_id, text=message)
 
 
 
