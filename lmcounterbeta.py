@@ -5,7 +5,8 @@ import requests
 endpoint = "https://formspree.io/f/xwkjnzgp"
 
 def main():
-    st.header("Lords Mobile Mixed Troop Strategy")
+    st.header("Lords Mobile Mix Troop Strategy")
+    st.write("Create your mix troop suggestion here")
 
     # Define the options for the troop formations dropdown
     troop_formations = ['Infantry Phalanx', 'Ranged Phalanx', 'Cavalry Phalanx', 'Infantry Wedge', 'Ranged Wedge', 'Cavalry Wedge']
@@ -65,7 +66,7 @@ def search_data(data, enemy_comp, enemy_form):
 
 # Main function
 def main():
-    st.header("Troop Search")
+    st.header("Mix Troop Search")
 
     # Read data from file
     data = read_data()
