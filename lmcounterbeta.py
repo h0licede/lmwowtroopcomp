@@ -30,7 +30,7 @@ df = pd.DataFrame(columns=['Enemy Troop Comp', 'Enemy Formation', 'Suggested Tro
 st.header("Enemy and Suggested Troop Compositions")
 enemy_comp = st.text_input("Enter enemy troop comp (e.g. 424)")
 enemy_form = st.selectbox("Select enemy formation", formations)
-suggested_comp = st.selectbox("Select suggested troop comp", troop_comps)
+suggested_comp = st.text_input("Enter suggested troop comp (e.g. 005)")
 suggested_form = st.selectbox("Select suggested formation", formations)
 submit = st.button("Submit")
 
