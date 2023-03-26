@@ -7,13 +7,12 @@ st.set_page_config(page_title="LORDS MOBILE WOW TROOP COMP")
 st.title("LORDS MOBILE WOW TROOP COMP")
 import streamlit as st
 
+st.write("<h4 style='text-align: center;'>This app is designed specifically for inexperienced / experienced Lords Mobile gamers who lead rallies in World of Wonder, Baron, etc. Using our easy-to-use input functions, you can register and save data on enemy compositions and the troop compositions and formations that you used to counter them. The app uses this registered data to suggest the most common troop compositions and formations used to counter a given enemy composition. The search results show the three most common registered entries for each enemy composition and formation combination.</h4>", unsafe_allow_html=True)
 
 
 
 
-st.write("")
-st.write("")
-st.write("")
+
 
 
 
@@ -27,36 +26,20 @@ import streamlit as st
 # Define the filename where input/output values will be saved
 filename = "data.txt"
 
-filename = "data.txt"
-
+# Define the function to save input/output values to the file
 def save_data(input1, input2, output1, output2):
-    # Write the data to the file
     with open(filename, "a") as f:
         f.write(f"{input1},{input2},{output1},{output2}\n")
-    
-    # Send a message to the Telegram chat
-    bot = telegram.Bot(token="6004011324:AAFv5wvhaYp48lBXtR5Z8P67ikL4dgDUndg")
-    chat_id = "5144085752"
-    message = f"New data saved: {input1}, {input2}, {output1}, {output2}"
-    bot.send_message(chat_id=chat_id, text=message)
 
-
-
-
-
+# Define the function to search for an output value based on input values
 def search_data(search_input1, search_input2):
     matching_entries = []
     with open(filename, "r") as f:
-        lines = f.readlines()
-        lines.reverse()  # reverse the order of lines to get the latest data first
-        for line in lines:
+        for line in f:
             input1, input2, output1, output2 = line.strip().split(",")
             if input1 == search_input1 and (search_input2 == "" or input2 == search_input2):
                 matching_entries.append((output1, output2))
-                if len(matching_entries) == 10:  # return when 10 entries have been found
-                    return matching_entries
-    return matching_entries  # return all entries found
-
+    return matching_entries[:3] # return only the first 3 search results
 
 # Define the Streamlit app
 import streamlit as st
@@ -85,8 +68,8 @@ def main():
         matching_entries = search_data(search_input1, search_input2)
         if matching_entries:
             st.success("Matching entries:")
-            for i, entry in enumerate(reversed(matching_entries[-10:])):
-                st.success(f"{len(matching_entries)-i}. Suggested Comp: {entry[0]}")
+            for i, entry in enumerate(matching_entries[:3]):
+                st.success(f"{i+1}. Suggested Comp: {entry[0]}")
                 st.success(f"Suggested Formation: {entry[1]}")
         else:
             st.warning("Data not found")
@@ -97,28 +80,6 @@ if __name__ == "__main__":
 
 
 
-
-
-import streamlit as st
-
-# Define the sidebar
-sidebar = st.sidebar
-
-# Increase the width of the sidebar
-# Add a title to the sidebar
-sidebar.title("Please report inaccurate troop comp and formation suggestion")
-
-# Add a header to the sidebar
-sidebar.header("Help us improve!")
-sidebar.write("If you find any inaccurate troop comp and formation suggestions, please report it to support@accesstv.live")
-
-# Add a separator to the sidebar
-sidebar.markdown("---")
-
-# Add some additional information to the sidebar
-sidebar.header("Disclaimer")
-  
-sidebar.write("This application serves as a basic reference to enhance your gameplay. However, it's essential to keep in mind that the troop compositions and formations recommended may not always be precise. Additionally, your individual account statistics and your opponent's can significantly impact the outcome of battles, even if you have utilized the recommended combination correctly.")
 
 
 
@@ -135,20 +96,3 @@ st.write("<h4 style='text-align: center;'>If you're feeling generous and want to
 
 
 st.markdown('<div style="text-align:center"><a href="https://paypal.me/h0licede" target="_blank" rel="noopener noreferrer">Please consider donating to my coffee fund to support my work</a></div>', unsafe_allow_html=True)
-
-
-st.write("")
-st.write("")
-st.write("")
-
-st.write("<h4 style='font-size: 14px; text-align: center;'>Join Dark Knights [D!K] guild now! We are looking for experienced rally leaders and T4/T5 fillers to join our team. Be a part of our growing community and conquer the kingdom together.</h4>", unsafe_allow_html=True)
-
-st.write("")
-
-
-
-
-st.markdown(
-    f'<div style="display: flex; justify-content: center;"><img src="https://s2.gifyu.com/images/dark-kinights-white-giffddf999a8d0a6add.gif" width="200"/></div>',
-    unsafe_allow_html=True
-)
