@@ -1,5 +1,8 @@
 import streamlit as st
 import requests
+import base64
+
+
 
 # Set page title
 st.set_page_config(page_title="LORDS MOBILE WOW TROOP COMP")
@@ -34,7 +37,7 @@ def save_data(input1, input2, output1, output2):
         existing_data.append(data_to_save)
     
     # Encode the data to base64
-    data_encoded = "\n".join([",".join(row) for row in existing_data]).encode("utf-8").encode("base64")
+    data_encoded = base64.b64encode("\n".join([",".join(row) for row in existing_data]).encode("utf-8")).decode("utf-8")
     
     # Make a POST request to the GitHub API to update the data file
     headers = {
