@@ -1,3 +1,14 @@
-424,Ranged Phalanx,055,Infantry Wedge
-424,Ranged Phalanx,208,Infantry Phalanx
-424,Ranged Phalanx,749,Ranged Phalanx
+enemy_composition: 424
+enemy_formation: ranged_phalanx
+suggested_composition: 055
+suggested_formation: infantry_wedge
+
+enemy_composition: 424
+enemy_formation: ranged_phalanx
+suggested_composition: 424
+suggested_formation: cavalry_phalanx
+
+enemy_composition: 442
+enemy_formation: ranged_phalanx
+suggested_composition: 433
+suggested_formation: infantry_phalanx
