@@ -166,3 +166,50 @@ st.markdown(
     f'<div style="display: flex; justify-content: center;"><img src="https://s2.gifyu.com/images/dark-kinights-white-giffddf999a8d0a6add.gif" width="200"/></div>',
     unsafe_allow_html=True
 )
+
+
+
+
+
+import streamlit as st
+
+st.header("Troop Composition Form")
+
+# Create dictionary to map formation choices to their corresponding string values
+formation_choices = {
+    "infantry phalanx": "Infantry Phalanx",
+    "ranged phalanx": "Ranged Phalanx",
+    "cavalry phalanx": "Cavalry Phalanx",
+    "infantry wedge": "Infantry Wedge",
+    "ranged wedge": "Ranged Wedge",
+    "cavalry wedge": "Cavalry Wedge"
+}
+
+# Define function to convert formation choice to string value
+def get_formation_string(formation_choice):
+    return formation_choices.get(formation_choice, "")
+
+# Define form inputs
+enemy_troop_comp = st.text_input("Enemy Troop Composition (3 numerical values, e.g. 424)")
+enemy_formation = st.selectbox("Enemy Formation", list(formation_choices.keys()))
+suggested_troop_comp = st.text_input("Suggested Troop Composition (3 numerical values, e.g. 208)")
+suggested_formation = st.selectbox("Suggested Formation", list(formation_choices.keys()))
+
+# Define function to format data as string for email
+def format_data():
+    enemy_formation_string = get_formation_string(enemy_formation)
+    suggested_formation_string = get_formation_string(suggested_formation)
+    data_string = f"{enemy_troop_comp},{enemy_formation_string},{suggested_troop_comp},{suggested_formation_string}"
+    return data_string
+
+# Define email submission button
+if st.button("Submit"):
+    # Format data as string
+    data_string = format_data()
+    # Send email with data
+    st.write(f"Email sent with data: {data_string}")
+    # Clear form inputs
+    enemy_troop_comp = ""
+    enemy_formation = ""
+    suggested_troop_comp = ""
+    suggested_formation = ""
