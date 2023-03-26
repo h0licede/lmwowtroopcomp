@@ -73,7 +73,8 @@ def main():
     st.write("")
 
     input1 = st.text_input("Enemy Comp", "")
-    input2 = st.selectbox("Enemy Formation", ["Infantry Phalanx", "Ranged Phalanx
+    input2 = st.selectbox("Enemy Formation", ["Infantry Phalanx", "Ranged Phalanx"])
+
 
     output1 = st.text_input("Suggested Comp", "")
     output2 = st.selectbox("Suggested Formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
