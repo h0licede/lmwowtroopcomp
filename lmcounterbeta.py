@@ -38,3 +38,43 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    
+    
+import streamlit as st
+
+def main():
+    st.header("Troop Suggestions")
+
+    # Read data from the data file
+    with open("data.txt", "r") as f:
+        data = f.readlines()
+
+    # Create a dictionary to store the data
+    troop_data = {}
+    for entry in data:
+        entry = entry.strip().split(",")
+        enemy_comp = entry[0]
+        enemy_form = entry[1]
+        suggested_comp = entry[2]
+        suggested_form = entry[3]
+        troop_data[(enemy_comp, enemy_form)] = (suggested_comp, suggested_form)
+
+    # Create the search form
+    st.subheader("Search Enemy Troop Composition and Formation")
+    enemy_comp = st.number_input("Enter Enemy Troop Composition (3-digit number)", min_value=0, max_value=999, step=1)
+    enemy_form = st.selectbox("Enter Enemy Troop Formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
+
+    # Get the suggested troop composition and formation
+    suggested_comp, suggested_form = troop_data.get((enemy_comp, enemy_form), ("", ""))
+
+    # Display the result
+    if suggested_comp and suggested_form:
+        st.subheader("Suggested Troop Composition and Formation")
+        st.write(f"Troop Composition: {suggested_comp}")
+        st.write(f"Troop Formation: {suggested_form}")
+    else:
+        st.subheader("No Matching Troop Data Found")
+
+if __name__ == "__main__":
+    main()
