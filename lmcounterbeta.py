@@ -1,3 +1,4 @@
+# import Streamlit module
 import streamlit as st
 
 # Set page title
@@ -5,36 +6,27 @@ st.set_page_config(page_title="LORDS MOBILE WOW TROOP COMP")
 
 # Add a title and subtitle
 st.title("LORDS MOBILE WOW TROOP COMP")
-import streamlit as st
 
 
+@st.cache(allow_output_mutation=True)
+def get_shared_data():
+    """
+    This function gets the shared data and returns it as a dictionary.
+    If the shared data is not present, it returns an empty dictionary.
+    """
+    shared_data = {}
+    if 'data' in st.secrets:
+        shared_data = st.secrets['data']
+    return shared_data
 
-
-
-st.write("")
-st.write("")
-st.write("")
-
-
-
-
-
-
-
-
-import streamlit as st
-
-# Define the filename where input/output values will be saved
-filename = "data.txt"
-
-filename = "data.txt"
 
 def save_data(input1, input2, output1, output2):
-    existing_data = []
-    with open(filename, "r") as f:
-        existing_data = [line.strip().split(",") for line in f.readlines()]
-        
+    """
+    This function saves the data to Streamlit data sharing.
+    """
+    shared_data = get_shared_data()
     data_to_save = [input1, input2, output1, output2]
+    existing_data = shared_data.get('existing_data', [])
     overwrite = False
     
     for i, row in enumerate(existing_data):
@@ -46,35 +38,29 @@ def save_data(input1, input2, output1, output2):
     if not overwrite:
         existing_data.append(data_to_save)
     
-    with open(filename, "w") as f:
-        for row in existing_data:
-            f.write(",".join(row) + "\n")
-    
+    shared_data['existing_data'] = existing_data
+    st.secrets['data'] = shared_data
     st.success("Data saved")
     return not overwrite
 
 
-
-
-
-
 def search_data(search_input1, search_input2):
+    """
+    This function searches for the data in the Streamlit data sharing and returns the matching entries.
+    """
     matching_entries = []
-    with open(filename, "r") as f:
-        lines = f.readlines()
-        lines.reverse()  # reverse the order of lines to get the latest data first
-        for line in lines:
-            input1, input2, output1, output2 = line.strip().split(",")
-            if input1 == search_input1 and (search_input2 == "" or input2 == search_input2):
-                matching_entries.append((output1, output2))
-                if len(matching_entries) == 10:  # return when 10 entries have been found
-                    return matching_entries
+    shared_data = get_shared_data()
+    existing_data = shared_data.get('existing_data', [])
+    for row in existing_data:
+        input1, input2, output1, output2 = row
+        if input1 == search_input1 and (search_input2 == "" or input2 == search_input2):
+            matching_entries.append((output1, output2))
+            if len(matching_entries) == 10:  # return when 10 entries have been found
+                return matching_entries
     return matching_entries  # return all entries found
 
 
 # Define the Streamlit app
-import streamlit as st
-
 def main():
     st.write("<h4 style='text-align: center;'>REGISTER TROOP COMP/FORM COUNTER</h4>", unsafe_allow_html=True)
     st.write("")
