@@ -30,31 +30,27 @@ filename = "data.txt"
 filename = "data.txt"
 
 def save_data(input1, input2, output1, output2):
-    if input1 and input2 and output1 and output2:  # check that all fields are filled
-        existing_data = []
-        with open(filename, "r") as f:
-            existing_data = [line.strip().split(",") for line in f.readlines()]
-            
-        data_to_save = [input1, input2, output1, output2]
-        overwrite = False
+    existing_data = []
+    with open(filename, "r") as f:
+        existing_data = [line.strip().split(",") for line in f.readlines()]
         
-        for i, row in enumerate(existing_data):
-            if row == data_to_save:
-                existing_data[i] = data_to_save
-                overwrite = True
-                break
-        
-        if not overwrite:
-            existing_data.append(data_to_save)
-        
-        with open(filename, "w") as f:
-            for row in existing_data:
-                f.write(",".join(row) + "\n")
-        
-        st.success("Data saved")
-    else:
-        st.warning("Please fill all fields before saving the data")
-        
+    data_to_save = [input1, input2, output1, output2]
+    overwrite = False
+    
+    for i, row in enumerate(existing_data):
+        if row == data_to_save:
+            existing_data[i] = data_to_save
+            overwrite = True
+            break
+    
+    if not overwrite:
+        existing_data.append(data_to_save)
+    
+    with open(filename, "w") as f:
+        for row in existing_data:
+            f.write(",".join(row) + "\n")
+    
+    st.success("Data saved")
     return not overwrite
 
 
