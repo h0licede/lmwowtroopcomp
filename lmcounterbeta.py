@@ -21,7 +21,7 @@ def main():
     st.markdown(
     """
     <div style='text-align:center'>
-        <h4 style='font-size: 1em; font-weight: semi-bold;'>Create your mix troop suggestion here</h4>
+        <h4 style='font-size: 1em; font-weight: semi-bold;'>Create Your Mix Troop Suggestion Here</h4>
     </div>
     """,
     unsafe_allow_html=True
@@ -87,7 +87,14 @@ def search_data(data, enemy_comp, enemy_form):
 
 # Main function
 def main():
-    st.header("Mix Troop Search")
+    st.markdown(
+    """
+    <div style='text-align:center'>
+        <h4 style='font-size: 1em; font-weight: semi-bold;'>Mix Troop Search</h4>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
     # Read data from file
     data = read_data()
