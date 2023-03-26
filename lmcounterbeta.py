@@ -151,7 +151,7 @@ sidebar.title("Please report inaccurate troop comp and formation suggestion")
 
 # Add a header to the sidebar
 sidebar.header("Help us improve!")
-sidebar.write("<p style='font-size: 14px;'>If you find any inaccurate troop comp and formation suggestions, please report it to support@accesstv.live</p>", unsafe_allow_html=True)
+sidebar.write("<p style='font-size: 14px;'>If you find any inaccurate mix troop composition and formation suggestions, please report it to lyricsstanza@gmail.com</p>", unsafe_allow_html=True)
 
 # Add a separator to the sidebar
 sidebar.markdown("---")
