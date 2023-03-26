@@ -6,7 +6,12 @@ endpoint = "https://formspree.io/f/xwkjnzgp"
 
 def main():
     st.header("Lords Mobile Mix Troop Strategy")
-    st.subheader("Create your mix troop suggestion here")
+    st.write("Create your mix troop suggestion here")
+    
+    
+st.write("")
+st.write("")
+
 
     # Define the options for the troop formations dropdown
     troop_formations = ['Infantry Phalanx', 'Ranged Phalanx', 'Cavalry Phalanx', 'Infantry Wedge', 'Ranged Wedge', 'Cavalry Wedge']
