@@ -43,40 +43,29 @@ if __name__ == "__main__":
     
 import streamlit as st
 
-def read_data_file(file_path):
-    """
-    Reads the data file and returns a dictionary of lists containing
-    the troop compositions and formations.
-    """
-    data_dict = {}
-    with open(file_path, "r") as f:
-        for line in f:
-            comps, formation = line.strip().split(",")
-            if comps not in data_dict:
-                data_dict[comps] = []
-            data_dict[comps].append(formation)
-    return data_dict
+def search_suggested_composition(data, enemy_composition, enemy_formation):
+    for row in data:
+        if row[0] == enemy_composition and row[1] == enemy_formation:
+            return row[2], row[3]
+    return "No suggestion found for the given enemy composition and formation.", ""
 
 def main():
-    st.header("Troop Composition Finder")
+    st.header("Search for Suggested Troop Composition and Formation")
 
-    # Read data file and store the troop compositions and formations in a dictionary
-    data_dict = read_data_file("data.txt")
+    # Load data from file
+    with open("data.txt", "r") as f:
+        data = [line.strip().split(",") for line in f]
 
-    # Get user input for enemy troop composition and formation
-    enemy_comps = st.text_input("Enemy Troop Composition (3 digits)", max_chars=3)
-    enemy_formation = st.selectbox("Enemy Troop Formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
+    # Get user inputs
+    enemy_composition = st.text_input("Enter enemy troop composition (3 digits)", max_chars=3)
+    enemy_formation = st.selectbox("Select enemy troop formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
+    search_button = st.button("Search")
 
-    # Show suggested troop compositions and formations
-    if st.button("Search"):
-        # Check if enemy troop composition exists in the data dictionary
-        if enemy_comps in data_dict:
-            st.success(f"Suggested Troop Composition: {enemy_comps}")
-            st.write("Suggested Troop Formations:")
-            for formation in data_dict[enemy_comps]:
-                st.write(formation)
-        else:
-            st.error("Enemy Troop Composition not found in data file")
+    # Search for suggested composition and formation if search button is pressed
+    if search_button:
+        suggested_composition, suggested_formation = search_suggested_composition(data, enemy_composition, enemy_formation)
+        st.write(f"Suggested troop composition: {suggested_composition}")
+        st.write(f"Suggested troop formation: {suggested_formation}")
 
 if __name__ == "__main__":
     main()
