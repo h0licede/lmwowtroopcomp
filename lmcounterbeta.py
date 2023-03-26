@@ -18,7 +18,8 @@ def save_data(input1, input2, output1, output2):
     # Read existing data from the GitHub repository
     response = requests.get(url)
     if response.ok:
-        existing_data = [line.strip().split(",") for line in response.json()["content"].decode("base64").splitlines()]
+        existing_data = [line.strip().split(",") for line in response.content.decode().splitlines()]
+
         
     data_to_save = [input1, input2, output1, output2]
     overwrite = False
