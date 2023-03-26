@@ -19,28 +19,37 @@ st.write("<h4 style='text-align: center;'>This app is designed specifically for 
 import streamlit as st
 import pandas as pd
 
-# Create a table to store user inputs and suggested troop comps and formations
+# Create a list of possible troop compositions and formations
+troop_comps = ['001', '002', '003', '004', '005']
+formations = ['infantry phalanx', 'ranged phalanx', 'cavalry phalanx', 'infantry wedge', 'ranged wedge', 'cavalry wedge']
+
+# Create an empty dataframe to store user inputs and results
 df = pd.DataFrame(columns=['Enemy Troop Comp', 'Enemy Formation', 'Suggested Troop Comp', 'Suggested Formation'])
 
-# Create a form for users to enter their enemy troop comp and formation
-enemy_troop_comp = st.selectbox('Enemy Troop Comp', ['Infantry Phalanx', 'Ranged Phalanx', 'Cavalry Phalanx', 'Infantry Wedge', 'Ranged Wedge', 'Cavalry Wedge'])
-enemy_formation = st.selectbox('Enemy Formation', ['Infantry Phalanx', 'Ranged Phalanx', 'Cavalry Phalanx', 'Infantry Wedge', 'Ranged Wedge', 'Cavalry Wedge'])
+# Create the user input section
+st.header("Enemy and Suggested Troop Compositions")
+enemy_comp = st.text_input("Enter enemy troop comp (e.g. 424)")
+enemy_form = st.selectbox("Select enemy formation", formations)
+suggested_comp = st.selectbox("Select suggested troop comp", troop_comps)
+suggested_form = st.selectbox("Select suggested formation", formations)
+submit = st.button("Submit")
 
-# Define a function to suggest troop comps and formations based on user inputs
-def suggest_troop_comp_and_formation(enemy_troop_comp, enemy_formation):
-    # Insert your algorithm here to suggest troop comps and formations based on user inputs
-    # For now, let's just suggest the same values as the user inputs
-    suggested_troop_comp = enemy_troop_comp
-    suggested_formation = enemy_formation
-    return suggested_troop_comp, suggested_formation
+# Add user inputs to the dataframe if the submit button is clicked
+if submit:
+    df = df.append({'Enemy Troop Comp': enemy_comp,
+                    'Enemy Formation': enemy_form,
+                    'Suggested Troop Comp': suggested_comp,
+                    'Suggested Formation': suggested_form},
+                   ignore_index=True)
 
-# Add user inputs and suggested troop comps and formations to the table
-if st.button('Add to Table'):
-    suggested_troop_comp, suggested_formation = suggest_troop_comp_and_formation(enemy_troop_comp, enemy_formation)
-    df.loc[len(df)] = [enemy_troop_comp, enemy_formation, suggested_troop_comp, suggested_formation]
+# Filter out duplicate rows and display the results
+df = df.drop_duplicates()
+if not df.empty:
+    st.header("Results")
+    st.dataframe(df)
+else:
+    st.info("No results yet. Enter some troop compositions and formations.")
 
-# Display the table
-st.dataframe(df)
 
 
 
