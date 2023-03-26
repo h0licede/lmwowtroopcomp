@@ -43,42 +43,40 @@ if __name__ == "__main__":
     
 import streamlit as st
 
-# Read data from text file
-data_file = "data.txt"
-data = []
-with open(data_file, "r") as f:
-    for line in f.readlines():
-        comps = line.strip().split(",")
-        data.append({
-            "enemy_comp": comps[0],
-            "enemy_form": comps[1],
-            "suggested_comp": comps[2],
-            "suggested_form": comps[3]
-        })
+def read_data_file(file_path):
+    """
+    Reads the data file and returns a dictionary of lists containing
+    the troop compositions and formations.
+    """
+    data_dict = {}
+    with open(file_path, "r") as f:
+        for line in f:
+            comps, formation = line.strip().split(",")
+            if comps not in data_dict:
+                data_dict[comps] = []
+            data_dict[comps].append(formation)
+    return data_dict
 
-# Define function for searching
-def search():
-    enemy_comp = st.text_input("Enter enemy composition:")
-    enemy_form = st.selectbox("Select enemy formation:", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
+def main():
+    st.header("Troop Composition Finder")
 
-    # Filter data based on user input
-    results = [d for d in data if d["enemy_comp"] == enemy_comp and d["enemy_form"] == enemy_form]
+    # Read data file and store the troop compositions and formations in a dictionary
+    data_dict = read_data_file("data.txt")
 
-    # Display results
-    if results:
-        st.write("Suggested Troop Composition and Formation:")
-        for result in results:
-            st.write(f"{result['suggested_comp']} {result['suggested_form']}")
-    else:
-        st.write("No results found.")
+    # Get user input for enemy troop composition and formation
+    enemy_comps = st.text_input("Enemy Troop Composition (3 digits)", max_chars=3)
+    enemy_formation = st.selectbox("Enemy Troop Formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
 
-# Create Streamlit app
-def app():
-    st.title("Troop Suggestion Tool")
-
-    search_button = st.button("Search")
-    if search_button:
-        search()
+    # Show suggested troop compositions and formations
+    if st.button("Search"):
+        # Check if enemy troop composition exists in the data dictionary
+        if enemy_comps in data_dict:
+            st.success(f"Suggested Troop Composition: {enemy_comps}")
+            st.write("Suggested Troop Formations:")
+            for formation in data_dict[enemy_comps]:
+                st.write(formation)
+        else:
+            st.error("Enemy Troop Composition not found in data file")
 
 if __name__ == "__main__":
-    app()
+    main()
