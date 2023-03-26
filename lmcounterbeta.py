@@ -9,8 +9,8 @@ def main():
     st.write("Create your mix troop suggestion here")
     
     
-st.write("")
-st.write("")
+    st.write("")
+    st.write("")
 
 
     # Define the options for the troop formations dropdown
