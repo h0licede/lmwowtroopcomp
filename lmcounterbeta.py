@@ -36,7 +36,7 @@ def save_data(input1, input2, output1, output2):
     
     # Send a message to the Telegram chat
     bot = telegram.Bot(token="6004011324:AAFv5wvhaYp48lBXtR5Z8P67ikL4dgDUndg")
-    chat_id = "@accesstvlive"
+    chat_id = "5144085752"
     message = f"New data saved: {input1}, {input2}, {output1}, {output2}"
     bot.send_message(chat_id=chat_id, text=message)
 
