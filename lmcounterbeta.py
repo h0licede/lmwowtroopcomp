@@ -75,6 +75,9 @@ def search_data(search_input1, search_input2):
 # Define the Streamlit app
 import streamlit as st
 
+import requests
+import streamlit as st
+
 def main():
     st.write("<h4 style='text-align: center;'>REGISTER TROOP COMP/FORM COUNTER</h4>", unsafe_allow_html=True)
     st.write("")
@@ -83,11 +86,27 @@ def main():
     input2 = st.selectbox("Enemy Formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
     output1 = st.text_input("Suggested Comp", "")
     output2 = st.selectbox("Suggested Formation", ["Infantry Phalanx", "Ranged Phalanx", "Cavalry Phalanx", "Infantry Wedge", "Ranged Wedge", "Cavalry Wedge"])
-    save_button = st.button("Save")
+    save_button = st.button("Submit")
 
     if save_button:
-        save_data(input1, input2, output1, output2)
-        st.success("Data saved")
+        # Set the FormSubmit API endpoint
+        endpoint = "https://formsubmit.co/your@email.com"
+
+        # Set the form data as a dictionary
+        form_data = {
+            "name": input1,
+            "email": input2,
+            "message": output1 + " - " + output2
+        }
+
+        # Send the form data using a POST request
+        response = requests.post(endpoint, data=form_data)
+
+        # Check if the request was successful and display appropriate message
+        if response.status_code == 200:
+            st.success("Data submitted successfully")
+        else:
+            st.error("Error submitting data")
         st.button("Reset")
 
     st.write("<h4 style='text-align: center;'>SUGGESTED TROOP COMP/FORM COUNTER</h4>", unsafe_allow_html=True)
@@ -108,7 +127,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 
 
