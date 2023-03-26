@@ -116,22 +116,24 @@ if __name__ == "__main__":
 import streamlit as st
 
 # Define the sidebar
-st.sidebar.title("Please report inaccurate troop comp and formation suggestion")
+sidebar = st.sidebar
+
+# Increase the width of the sidebar
+# Add a title to the sidebar
+sidebar.title("Please report inaccurate troop comp and formation suggestion")
 
 # Add a header to the sidebar
-st.sidebar.header("Help us improve!")
-st.sidebar.write("If you find any inaccurate troop comp and formation suggestions, please report it to support@accesstv.live")
+sidebar.header("Help us improve!")
+sidebar.write("If you find any inaccurate troop comp and formation suggestions, please report it to support@accesstv.live")
 
 # Add a separator to the sidebar
-st.sidebar.markdown("---")
+sidebar.markdown("---")
 
 # Add some additional information to the sidebar
-st.sidebar.header("Disclaimer")
+sidebar.header("Disclaimer")
   
-st.sidebar.write("This application serves as a basic reference to enhance your gameplay. However, it's essential to keep in mind that the troop compositions and formations recommended may not always be precise. Additionally, your individual account statistics and your opponent's can significantly impact the outcome of battles, even if you have utilized the recommended combination correctly.")
-  
+sidebar.write("This application serves as a basic reference to enhance your gameplay. However, it's essential to keep in mind that the troop compositions and formations recommended may not always be precise. Additionally, your individual account statistics and your opponent's can significantly impact the outcome of battles, even if you have utilized the recommended combination correctly.")
 
-import streamlit as st
 
 
 
@@ -164,4 +166,3 @@ st.markdown(
     f'<div style="display: flex; justify-content: center;"><img src="https://s2.gifyu.com/images/dark-kinights-white-giffddf999a8d0a6add.gif" width="200"/></div>',
     unsafe_allow_html=True
 )
-
