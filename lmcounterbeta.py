@@ -6,11 +6,18 @@ endpoint = "https://formspree.io/f/xwkjnzgp"
 
 def main():
     st.header("Lords Mobile Mix Troop Strategy")
-    st.write("Create your mix troop suggestion here")
-    
     
     st.write("")
     st.write("")
+    
+    st.markdown(
+    """
+    <div style='text-align:center'>
+        <h1 style='font-size: 3em'>Create your mix troop suggestion here</h1>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 
     # Define the options for the troop formations dropdown
