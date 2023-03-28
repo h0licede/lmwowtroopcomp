@@ -20,3 +20,6 @@ def app():
                 st.write(message)
         if not found:
             st.write("No matching troop comp found. Please enter a valid 3 digit number.")
+
+# Run the app
+app()
