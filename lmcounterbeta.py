@@ -2,24 +2,6 @@ import streamlit as st
 import pandas as pd
 import requests
 
-st.markdown(
-    f'<div style="display: flex; justify-content: center;"><img src="https://i.postimg.cc/ZqxVnStT/dark-kinights-logo.png" width="200"/></div>',
-    unsafe_allow_html=True
-)
-
-st.markdown(
-    """
-    <div style='text-align:center'>
-        <h4 style='font-size: 2em; font-weight: bold;'>Lords Mobile Mix Troop Strategy</h4>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-
-
-st.write("")
-st.write("")
 
 # Load the data
 comps = pd.read_csv('comps.csv')
@@ -34,12 +16,17 @@ def app():
         for index, row in comps.iterrows():
             if user_input in row['Enemy Comp'] or user_input == row['Suggested Comp'] or user_input in row['Suggested Comp Can Be Countered By']:
                 found = True
-                message = f"Enemy Comp: {row['Enemy Comp']}\nSuggested Comp: {row['Suggested Comp']}\nSuggested Comp Can Be Countered By: {row['Suggested Comp Can Be Countered By']}"
+                message = f"Enemy Comp: {highlight_text(user_input, row['Enemy Comp'])}\nSuggested Comp: {highlight_text(user_input, row['Suggested Comp'])}\nSuggested Comp Can Be Countered By: {highlight_text(user_input, row['Suggested Comp Can Be Countered By'])}"
                 st.write(message)
         if not found:
             st.write("No matching troop comp found. Please enter a valid 3 digit number.")
 
+# Helper function to highlight the user input
+def highlight_text(user_input, text):
+    return text.replace(user_input, f"<mark>{user_input}</mark>", 1)
+
 app()
+
 
 
 
