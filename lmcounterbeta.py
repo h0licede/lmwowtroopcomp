@@ -26,7 +26,7 @@ comps = pd.read_csv('comps.csv')
 
 # Define the app
 def app():
-    user_input = st.text_input("Type in enemy comp in 3 digit number:")
+    user_input = st.text_input("Type in troop comp in 3 digit number:")
 
     # Show the results
     if user_input:
