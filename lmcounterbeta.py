@@ -39,7 +39,7 @@ app()
 
 
 # Define the Formspree API endpoint
-endpoint = "https://formspree.io/f/xwkjnzgp"
+endpoint = "https://formspree.io/f/xeqwlyrw"
 
 def main():
     
