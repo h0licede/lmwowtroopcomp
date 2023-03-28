@@ -146,8 +146,10 @@ sidebar.header("Disclaimer")
   
 sidebar.write("<p style='font-size: 14px;'>This application serves as a basic reference to enhance your gameplay. However, it's essential to keep in mind that the troop compositions and formations recommended may not always be precise. Additionally, your individual account statistics and your opponent's can significantly impact the outcome of battles, even if you have utilized the recommended combination correctly.</p>", unsafe_allow_html=True)
 
-st.markdown(
+
+import streamlit as st
+
+st.sidebar.markdown(
     f'<div style="display: flex; justify-content: center;"><img src="https://i.postimg.cc/ZqxVnStT/dark-kinights-logo.png" width="200"/></div>',
     unsafe_allow_html=True
 )
-
