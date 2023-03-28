@@ -6,7 +6,8 @@ comps = pd.read_csv('comps.csv')
 
 # Define the app
 def app():
-    # Show the input field
+    # Set up the title and input field
+    st.title("Troop Comp Counter Bot")
     user_input = st.text_input("Type in enemy comp in 3 digit number:")
 
     # Show the results
@@ -19,3 +20,5 @@ def app():
                 st.write(message)
         if not found:
             st.write("No matching troop comp found. Please enter a valid 3 digit number.")
+
+app()
