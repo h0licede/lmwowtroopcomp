@@ -2,6 +2,11 @@ import streamlit as st
 import pandas as pd
 import requests
 
+st.sidebar.markdown(
+    f'<div style="display: flex; justify-content: center;"><img src="https://i.postimg.cc/ZqxVnStT/dark-kinights-logo.png" width="200"/></div>',
+    unsafe_allow_html=True
+)
+
 st.markdown(
     """
     <div style='text-align:center'>
@@ -130,10 +135,7 @@ import streamlit as st
 # Define the sidebar
 sidebar = st.sidebar
 
-st.sidebar.markdown(
-    f'<div style="display: flex; justify-content: center;"><img src="https://i.postimg.cc/ZqxVnStT/dark-kinights-logo.png" width="200"/></div>',
-    unsafe_allow_html=True
-)
+
 
 
 
