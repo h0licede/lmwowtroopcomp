@@ -120,7 +120,7 @@ st.write("<h4 style='font-size: 95%; text-align: center;'>Join Dark Knights [D!K
 st.write("")
 
 st.markdown(
-    f'<div style="display: flex; justify-content: center;"><img src="https://s2.gifyu.com/images/dark-kinights-white-giffddf999a8d0a6add.gif" width="200"/></div>',
+    f'<div style="display: flex; justify-content: center;"><img src="https://postimg.cc/Z90rsX5g" width="200"/></div>',
     unsafe_allow_html=True
 )
 
