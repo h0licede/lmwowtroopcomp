@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests
 
-st.sidebar.markdown(
+st.markdown(
     f'<div style="display: flex; justify-content: center;"><img src="https://i.postimg.cc/ZqxVnStT/dark-kinights-logo.png" width="200"/></div>',
     unsafe_allow_html=True
 )
