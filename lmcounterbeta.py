@@ -10,14 +10,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.markdown(
-    """
-    <div style='text-align:center'>
-        <h4 style='font-size: 1.2em; font-weight: regular;'>Submit your mixed composition suggestions for review and improve our search results! Your input helps us update and add relevant search results to the app.</h4>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+
 
 st.write("")
 st.write("")
@@ -53,6 +46,15 @@ def main():
 
     st.write("")
     st.write("")
+    
+    st.markdown(
+    """
+    <div style='text-align:center'>
+        <h4 style='font-size: 1.2em; font-weight: regular;'>Submit your mixed composition suggestions for review and improve our search results! Your input helps us update and add relevant search results to the app.</h4>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
     
     st.markdown(
         """
