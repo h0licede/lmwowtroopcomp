@@ -3,7 +3,6 @@ import pandas as pd
 
 # Load the data
 comps = pd.read_csv('comps.csv')
-comps.columns = comps.columns.str.strip()
 
 # Define the app
 def app():
