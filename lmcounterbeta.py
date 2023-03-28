@@ -6,7 +6,7 @@ comps = pd.read_csv('comps.csv')
 
 # Define the app
 def app():
-    # Show the input box
+    # Show the input field
     user_input = st.text_input("Type in enemy comp in 3 digit number:")
 
     # Show the results
