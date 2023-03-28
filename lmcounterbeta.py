@@ -101,3 +101,48 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
+    
+    
+st.write("<h4 style='text-align: center; font-size: 95%;'>Donation</h4>", unsafe_allow_html=True)
+
+st.write("<h4 style='font-size: 95%; text-align: center;'>If you're feeling generous and want to support my caffeine addiction while I work on this project, consider donating to my coffee fund. I promise I'll use it to stay awake and make more cool stuff 😜</h4>", unsafe_allow_html=True)
+
+st.markdown('<div style="text-align:center; font-size: 95%;"><a href="https://paypal.me/h0licede" target="_blank" rel="noopener noreferrer">Please consider donating to my coffee fund to support my work</a></div>', unsafe_allow_html=True)
+
+st.write("")
+st.write("")
+st.write("")
+
+st.write("<h4 style='font-size: 95%; text-align: center;'>Join Dark Knights [D!K] guild now! We are looking for experienced rally leaders and T4/T5 fillers to join our team. Be a part of our growing community and conquer the kingdom together.</h4>", unsafe_allow_html=True)
+
+st.write("")
+
+st.markdown(
+    f'<div style="display: flex; justify-content: center;"><img src="https://s2.gifyu.com/images/dark-kinights-white-giffddf999a8d0a6add.gif" width="200"/></div>',
+    unsafe_allow_html=True
+)
+
+
+import streamlit as st
+
+# Define the sidebar
+sidebar = st.sidebar
+
+# Increase the width of the sidebar
+# Add a title to the sidebar
+sidebar.title("Please report inaccurate troop comp and formation suggestion")
+
+# Add a header to the sidebar
+sidebar.header("Help us improve!")
+sidebar.write("<p style='font-size: 14px;'>If you find any inaccurate mix troop composition and formation suggestions, please report it to lyricsstanza@gmail.com</p>", unsafe_allow_html=True)
+
+# Add a separator to the sidebar
+sidebar.markdown("---")
+
+# Add some additional information to the sidebar
+sidebar.header("Disclaimer")
+  
+sidebar.write("<p style='font-size: 14px;'>This application serves as a basic reference to enhance your gameplay. However, it's essential to keep in mind that the troop compositions and formations recommended may not always be precise. Additionally, your individual account statistics and your opponent's can significantly impact the outcome of battles, even if you have utilized the recommended combination correctly.</p>", unsafe_allow_html=True)
+
+
