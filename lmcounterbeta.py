@@ -1,6 +1,22 @@
 import streamlit as st
 import pandas as pd
 
+
+st.markdown(
+    f'<div style="display: flex; justify-content: center;"><img src="https://i.postimg.cc/ZqxVnStT/dark-kinights-logo.png" width="200"/></div>',
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    """
+    <div style='text-align:center'>
+        <h4 style='font-size: 2em; font-weight: bold;'>Lords Mobile Mix Troop Strategy</h4>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+
 # Load the data
 comps = pd.read_csv('comps.csv')
 
