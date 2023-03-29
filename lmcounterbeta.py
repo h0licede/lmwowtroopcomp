@@ -13,7 +13,7 @@ def app():
     if user_input:
         found = False
         for index, row in comps.iterrows():
-            if row['Enemy Comp'].str.contains(user_input).any():
+            if str(user_input) in str(row['Enemy Comp']):
                 found = True
                 message = f"Enemy Comp: {row['Enemy Comp']}\nCounter Comp: {row['Counter Comp']}"
                 st.write(message)
@@ -22,6 +22,8 @@ def app():
 
 # Run the app
 app()
+
+
 
 
 
