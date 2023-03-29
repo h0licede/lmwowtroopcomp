@@ -1,22 +1,6 @@
 import streamlit as st
 import pandas as pd
-
-st.markdown(
-    f'<div style="display: flex; justify-content: center;"><img src="https://i.postimg.cc/ZqxVnStT/dark-kinights-logo.png" width="200"/></div>',
-    unsafe_allow_html=True
-)
-
-st.markdown(
-    """
-    <div style='text-align:center'>
-        <h4 style='font-size: 2em; font-weight: bold;'>Lords Mobile Mix Troop Strategy</h4>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-st.write("")
-st.write("")
+import requests
 
 # Load the data
 comps = pd.read_csv('comps.csv')
@@ -29,14 +13,16 @@ def app():
     if user_input:
         found = False
         for index, row in comps.iterrows():
-            if user_input in str(row['Enemy Comp']) or user_input == str(row['Suggested Comp']):
+            if user_input in row['Enemy Comp']:
                 found = True
-                message = f"Enemy Comp: {row['Enemy Comp']}\nSuggested Comp: {row['Suggested Comp']}"
+                message = f"Enemy Comp: {row['Enemy Comp']}\nCounter Comp: {row['Counter Comp']}"
                 st.write(message)
         if not found:
             st.write("No matching troop comp found. Please enter a valid 3 digit number.")
 
+# Run the app
 app()
+
 
 
 
