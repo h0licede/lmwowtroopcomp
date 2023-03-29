@@ -13,15 +13,16 @@ def app():
     if user_input:
         found = False
         for index, row in comps.iterrows():
-            if user_input in row['Enemy Comp']:
+            if user_input in row['Enemy Comp'] or user_input == row['Suggested Comp']:
                 found = True
-                message = f"Enemy Comp: {row['Enemy Comp']}\nCounter Comp: {row['Counter Comp']}"
+                message = f"Enemy Comp: {row['Enemy Comp']}\nSuggested Comp: {row['Suggested Comp']}"
                 st.write(message)
         if not found:
             st.write("No matching troop comp found. Please enter a valid 3 digit number.")
 
 # Run the app
 app()
+
 
 
 
