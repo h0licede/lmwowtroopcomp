@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import requests
 
 # Load the data
 comps = pd.read_csv('comps.csv')
@@ -20,7 +19,8 @@ def app():
         if not found:
             st.write("No matching troop comp found. Please enter a valid 3 digit number.")
 
-
+# Run the app
+app()
 
 
 
