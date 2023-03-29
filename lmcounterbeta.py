@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import requests
 
 # Load the data
 comps = pd.read_csv('comps.csv')
@@ -11,13 +10,11 @@ def app():
 
     # Show the results
     if user_input:
-        found = False
-        for index, row in comps.iterrows():
-            if user_input in row['Enemy Comp']:
-                found = True
-                message = f"Enemy Comp: {row['Enemy Comp']}\nCounter Comp: {row['Counter Comp']}"
-                st.write(message)
-        if not found:
+        row = comps[comps['Enemy Comp'] == user_input]
+        if not row.empty:
+            message = f"Enemy Comp: {row['Enemy Comp'].values[0]}\nCounter Comp: {row['Counter Comp'].values[0]}"
+            st.write(message)
+        else:
             st.write("No matching troop comp found. Please enter a valid 3 digit number.")
 
 # Run the app
