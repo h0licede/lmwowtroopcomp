@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import requests
 
 # Load the data
 comps = pd.read_csv('comps.csv')
@@ -13,7 +12,8 @@ def app():
     if user_input:
         found = False
         for index, row in comps.iterrows():
-            if str(user_input) in str(row['Enemy Comp']):
+            enemy_comps = row['Enemy Comp'].split(',')
+            if user_input in enemy_comps:
                 found = True
                 message = f"Enemy Comp: {row['Enemy Comp']}\nCounter Comp: {row['Counter Comp']}"
                 st.write(message)
@@ -22,6 +22,7 @@ def app():
 
 # Run the app
 app()
+
 
 
 
