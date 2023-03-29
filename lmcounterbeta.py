@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import requests
 
 st.markdown(
     f'<div style="display: flex; justify-content: center;"><img src="https://i.postimg.cc/ZqxVnStT/dark-kinights-logo.png" width="200"/></div>',
@@ -30,7 +29,7 @@ def app():
     if user_input:
         found = False
         for index, row in comps.iterrows():
-            if user_input in row['Enemy Comp'] or user_input == row['Suggested Comp']:
+            if user_input in str(row['Enemy Comp']) or user_input == str(row['Suggested Comp']):
                 found = True
                 message = f"Enemy Comp: {row['Enemy Comp']}\nSuggested Comp: {row['Suggested Comp']}"
                 st.write(message)
@@ -38,6 +37,7 @@ def app():
             st.write("No matching troop comp found. Please enter a valid 3 digit number.")
 
 app()
+
 
 
 
