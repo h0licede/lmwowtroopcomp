@@ -1,18 +1,19 @@
 import streamlit as st
 import pandas as pd
+import requests
 
 # Load the data
 comps = pd.read_csv('comps.csv')
 
 # Define the app
 def app():
-    user_input = st.text_input("Type in enemy troop comp in 3 digit number:")
+    user_input = st.text_input("Type in troop comp in 3 digit number:")
 
     # Show the results
     if user_input:
         found = False
         for index, row in comps.iterrows():
-            if str(user_input) in str(row['Enemy Comp']):
+            if row['Enemy Comp'].str.contains(user_input).any():
                 found = True
                 message = f"Enemy Comp: {row['Enemy Comp']}\nCounter Comp: {row['Counter Comp']}"
                 st.write(message)
@@ -21,6 +22,7 @@ def app():
 
 # Run the app
 app()
+
 
 
 
