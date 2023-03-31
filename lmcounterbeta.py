@@ -169,9 +169,10 @@ sidebar.write("<p style='font-size: 14px;'>This application serves as a basic re
 
 import streamlit as st
 import pandas as pd
+import time
 
 # Create the URL to the raw data file
-url = 'https://raw.githubusercontent.com/h0licede/lmwowtroopcomp/main/suggested_comps.csv'
+url = f'https://raw.githubusercontent.com/h0licede/lmwowtroopcomp/main/suggested_comps.csv?time={int(time.time())}'
 
 # Read the existing data or create a new DataFrame if the file does not exist
 try:
