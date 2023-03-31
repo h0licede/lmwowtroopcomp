@@ -180,10 +180,8 @@ if csv_path.exists():
 else:
     suggested_comps = pd.DataFrame(columns=["Enemy Comp", "Counter Comp"])
 
-# center all titles
-st.set_page_config(page_title="Suggested Comps", layout="wide")
-st.markdown("<h1 style='text-align: center;'>Suggested Comps</h1>", unsafe_allow_html=True)
-st.subheader("Add a new suggestion")
+# display the current entries
+st.write(suggested_comps)
 
 # get user input
 enemy_comp = st.text_input("Suggested Enemy Comp (3-digit code)")
@@ -191,15 +189,12 @@ counter_comp = st.text_input("Suggested Counter Comp (3-digit code)")
 
 # check if input is valid
 valid_input = True
-if len(enemy_comp.strip()) == 0 and len(counter_comp.strip()) == 0:
+if len(enemy_comp) != 3 or not enemy_comp.isdigit():
+    st.error("Invalid Enemy Comp: Please enter a 3-digit number")
     valid_input = False
-else:
-    if len(enemy_comp) != 3 or not enemy_comp.isdigit():
-        st.error("Invalid Enemy Comp: Please enter a 3-digit number")
-        valid_input = False
-    if len(counter_comp) != 3 or not counter_comp.isdigit():
-        st.error("Invalid Counter Comp: Please enter a 3-digit number")
-        valid_input = False
+if len(counter_comp) != 3 or not counter_comp.isdigit():
+    st.error("Invalid Counter Comp: Please enter a 3-digit number")
+    valid_input = False
 
 if valid_input:
     # check if the entry already exists
@@ -214,10 +209,3 @@ if valid_input:
 
     # save the DataFrame to csv
     suggested_comps.to_csv(csv_path, index=False)
-
-# display the current entries
-st.subheader("Current entries")
-if suggested_comps.empty:
-    st.write("No entries yet.")
-else:
-    st.dataframe(suggested_comps.style.set_properties(**{'text-align': 'center'}), height=400, width=500)
