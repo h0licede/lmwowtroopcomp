@@ -169,30 +169,46 @@ sidebar.write("<p style='font-size: 14px;'>This application serves as a basic re
 
 import streamlit as st
 import pandas as pd
+import os
 
-# Load existing suggestions
-suggested_comps = pd.read_csv("suggested_comps.csv", index_col=0)
+# Check if the csv file exists and create it if not
+if not os.path.isfile("suggested_comps.csv"):
+    suggested_comps = pd.DataFrame(columns=["Enemy Comp", "Counter Comp", "Overwritten Count"])
+    suggested_comps.to_csv("suggested_comps.csv", index=False)
 
-# Define UI elements
-st.header("Suggest Enemy and Counter Compositions")
-enemy_comp = st.text_input("Enter 3-digit Enemy Composition Code:")
-counter_comp = st.text_input("Enter 3-digit Counter Composition Code:")
-submit_button = st.button("Submit")
+# Load the csv file
+suggested_comps = pd.read_csv("suggested_comps.csv")
 
-# Add new suggestion
-if submit_button:
-    new_entry = pd.DataFrame({"Enemy Comp": [enemy_comp], "Counter Comp": [counter_comp]})
+# Streamlit app
+st.title("Suggested Comps")
+
+# Display the existing entries
+if not suggested_comps.empty:
+    st.write("Existing Entries:")
+    st.dataframe(suggested_comps)
+
+# Get the user input
+st.write("Add New Entry:")
+enemy_comp = st.text_input("Suggested Enemy Comp (3 digits)", max_chars=3).upper()
+counter_comp = st.text_input("Suggested Counter Comp (3 digits)", max_chars=3).upper()
+
+# Check if the user clicked the submit button
+if st.button("Submit"):
+    # Check if the entry already exists
     if ((suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp)).any():
+        # Overwrite the existing entry and update the Overwritten Count
         suggested_comps.loc[(suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp), "Overwritten Count"] += 1
-        st.write("Entry already exists. Overwritten count updated.")
+        suggested_comps.to_csv("suggested_comps.csv", index=False)
+        st.write("The entry has been overwritten.")
     else:
-        suggested_comps = suggested_comps[~((suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp))]
-        suggested_comps = pd.concat([suggested_comps, new_entry], ignore_index=True)
-        st.write("New entry added.")
-    
-    # Save updated suggestions
-    suggested_comps.to_csv("suggested_comps.csv")
-    
-# Display current suggestions
-st.header("Current Suggestions")
-st.write(suggested_comps)
+        # Add the new entry to the dataframe and save it to the csv file
+        new_entry = pd.DataFrame({"Enemy Comp": [enemy_comp], "Counter Comp": [counter_comp], "Overwritten Count": [0]})
+        suggested_comps = suggested_comps.append(new_entry, ignore_index=True)
+        suggested_comps.to_csv("suggested_comps.csv", index=False)
+        st.write("The entry has been added.")
+
+# Display the updated dataframe
+if not suggested_comps.empty:
+    st.write("Updated Entries:")
+    st.dataframe(suggested_comps)
+
