@@ -171,6 +171,9 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 
+# Center all titles
+st.set_page_config(page_title="Suggested Comps", layout="centered")
+
 # create a path to the csv file
 csv_path = Path("suggested_comps.csv")
 
@@ -189,10 +192,10 @@ counter_comp = st.text_input("Suggested Counter Comp (3-digit code)")
 
 # check if input is valid
 valid_input = True
-if len(enemy_comp) != 3 or not enemy_comp.isdigit():
+if enemy_comp != "" and (len(enemy_comp) != 3 or not enemy_comp.isdigit()):
     st.error("Invalid Enemy Comp: Please enter a 3-digit number")
     valid_input = False
-if len(counter_comp) != 3 or not counter_comp.isdigit():
+if counter_comp != "" and (len(counter_comp) != 3 or not counter_comp.isdigit()):
     st.error("Invalid Counter Comp: Please enter a 3-digit number")
     valid_input = False
 
