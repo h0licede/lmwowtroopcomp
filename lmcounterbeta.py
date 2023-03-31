@@ -189,7 +189,7 @@ if st.button("Submit"):
         st.error("Please enter a valid 3-digit code for both enemy and counter comp.")
     else:
         # Check if entry already exists and increment overwritten count if it does
-        if (entries["Enemy Comp"] == enemy_comp) & (entries["Counter Comp"] == counter_comp)).any():
+        if (entries["Enemy Comp"] == enemy_comp) & (entries["Counter Comp"] == counter_comp).any():
             entries.loc[(entries["Enemy Comp"] == enemy_comp) & (entries["Counter Comp"] == counter_comp), "Overwritten Count"] += 1
             st.success(f"Entry ({enemy_comp}, {counter_comp}) overwritten.")
         # Otherwise, add new entry
@@ -198,7 +198,7 @@ if st.button("Submit"):
             st.success(f"Entry ({enemy_comp}, {counter_comp}) added.")
 
         # Save entries to CSV file
-        entries.to_csv("suggested_comps.csv")
+        entries.to_csv("suggested_comps.csv", index_label="Index")
 
 # Display table of all entries
 st.write("All Entries:")
