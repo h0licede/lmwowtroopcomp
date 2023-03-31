@@ -181,22 +181,24 @@ else:
     suggested_comps = pd.DataFrame(columns=["Enemy Comp", "Counter Comp"])
 
 # display the current entries
-st.write(suggested_comps)
+st.write(suggested_comps.style.set_properties(**{'text-align': 'center'}), unsafe_allow_html=True)
 
 # get user input
 enemy_comp = st.text_input("Suggested Enemy Comp (3-digit code)")
 counter_comp = st.text_input("Suggested Counter Comp (3-digit code)")
 
 # check if input is valid
-valid_input = True
-if len(enemy_comp) != 3 or not enemy_comp.isdigit():
+valid_input = False
+if enemy_comp and (len(enemy_comp) != 3 or not enemy_comp.isdigit()):
     st.error("Invalid Enemy Comp: Please enter a 3-digit number")
-    valid_input = False
-if len(counter_comp) != 3 or not counter_comp.isdigit():
+else:
+    valid_input = True
+if counter_comp and (len(counter_comp) != 3 or not counter_comp.isdigit()):
     st.error("Invalid Counter Comp: Please enter a 3-digit number")
-    valid_input = False
+else:
+    valid_input = valid_input and True
 
-if valid_input:
+if valid_input and enemy_comp and counter_comp:
     # check if the entry already exists
     if ((suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp)).any():
         st.write("Entry already exists!")
@@ -209,3 +211,4 @@ if valid_input:
 
     # save the DataFrame to csv
     suggested_comps.to_csv(csv_path, index=False)
+
