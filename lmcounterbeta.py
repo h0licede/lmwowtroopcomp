@@ -167,42 +167,27 @@ sidebar.write("<p style='font-size: 14px;'>This application serves as a basic re
 
 
 
-import streamlit as st
 import pandas as pd
+import streamlit as st
 
-# Load the existing data from CSV file
-suggested_comps = pd.read_csv("suggested_comps.csv")
+def get_suggested_comps():
+    comps = pd.read_csv("data/lmcounter.csv")
+    return comps
 
-# Counter for generating unique widget IDs
-widget_counter = 0
-
-# Define the Streamlit app
 def app():
+    st.title("LM WOW Counter Picker")
 
-    # Increment the widget counter
-    global widget_counter
-    widget_counter += 1
+    suggested_comps = get_suggested_comps()
 
-    # Create the input widgets
-    enemy_comp = st.text_input(f"Suggested Enemy Comp {widget_counter}")
-    counter_comp = st.text_input(f"Suggested Counter Comp {widget_counter}")
+    enemy_comp = st.text_input("Enter Enemy Comp:")
+    counter_comp = st.text_input("Enter Counter Comp:")
 
-    # Save the data when the user clicks the Submit button
-    if st.button(f"Submit {widget_counter}"):
-        # Check if the suggested comp already exists in the DataFrame
+    if st.button("Submit"):
         comp_exists = ((suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp)).any()
         if comp_exists:
-            # If the suggested comp already exists, update the number of times it was overwritten
-            suggested_comps.loc[(suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp), "Overwritten"] += 1
+            st.write(suggested_comps[(suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp)])
         else:
-            # If the suggested comp does not exist, add it to the DataFrame
-            suggested_comps = suggested_comps.append({"Enemy Comp": enemy_comp, "Counter Comp": counter_comp, "Overwritten": 0}, ignore_index=True)
-        # Save the DataFrame to CSV file
-        suggested_comps.to_csv("suggested_comps.csv", index=False)
+            st.write("No suggested comps found for the entered enemy and counter comps.")
 
-    # Display the table of suggested comps
-    st.table(suggested_comps)
-
-# Run the app
 if __name__ == "__main__":
     app()
