@@ -163,3 +163,43 @@ sidebar.header("Disclaimer")
   
 sidebar.write("<p style='font-size: 14px;'>This application serves as a basic reference to enhance your gameplay. However, it's essential to keep in mind that the troop compositions and formations recommended may not always be precise. Additionally, your individual account statistics and your opponent's can significantly impact the outcome of battles, even if you have utilized the recommended combination correctly.</p>", unsafe_allow_html=True)
 
+
+
+
+
+import streamlit as st
+import pandas as pd
+
+# Load existing entries from CSV file
+try:
+    entries = pd.read_csv("suggested_comps.csv", index_col=0)
+except FileNotFoundError:
+    entries = pd.DataFrame(columns=["Enemy Comp", "Counter Comp", "Overwritten Count"])
+
+# Define Streamlit app layout
+st.title("Suggested Comps")
+st.write("Type in the suggested enemy comp and suggested counter comp below.")
+enemy_comp = st.text_input("Suggested Enemy Comp (3 digits)")
+counter_comp = st.text_input("Suggested Counter Comp (3 digits)")
+
+# Handle form submission
+if st.button("Submit"):
+    # Check if input is valid
+    if len(enemy_comp) != 3 or len(counter_comp) != 3:
+        st.error("Please enter a valid 3-digit code for both enemy and counter comp.")
+    else:
+        # Check if entry already exists and increment overwritten count if it does
+        if (entries["Enemy Comp"] == enemy_comp) & (entries["Counter Comp"] == counter_comp)).any():
+            entries.loc[(entries["Enemy Comp"] == enemy_comp) & (entries["Counter Comp"] == counter_comp), "Overwritten Count"] += 1
+            st.success(f"Entry ({enemy_comp}, {counter_comp}) overwritten.")
+        # Otherwise, add new entry
+        else:
+            entries = entries.append({"Enemy Comp": enemy_comp, "Counter Comp": counter_comp, "Overwritten Count": 0}, ignore_index=True)
+            st.success(f"Entry ({enemy_comp}, {counter_comp}) added.")
+
+        # Save entries to CSV file
+        entries.to_csv("suggested_comps.csv")
+
+# Display table of all entries
+st.write("All Entries:")
+st.table(entries)
