@@ -167,38 +167,46 @@ sidebar.write("<p style='font-size: 14px;'>This application serves as a basic re
 
 
 
-import pandas as pd
 import streamlit as st
+import pandas as pd
+from pathlib import Path
 
-# Define Streamlit app layout
-st.title("Suggested Comps")
-st.write("Type in the suggested enemy comp and suggested counter comp below.")
-enemy_comp = st.text_input("Suggested Enemy Comp (3 digits)", key="enemy_comp_input")
-counter_comp = st.text_input("Suggested Counter Comp (3 digits)", key="counter_comp_input")
+# create a path to the csv file
+csv_path = Path("suggested_comps.csv")
 
-# Handle form submission
-if st.button("Submit", key="submit_button"):
-    # Load existing suggested comps or create new dataframe if file does not exist
-    try:
-        suggested_comps = pd.read_csv("suggested_comps.csv", index_col=0)
-    except FileNotFoundError:
-        suggested_comps = pd.DataFrame(columns=["Enemy Comp", "Counter Comp", "Overwrite Count"])
+# create an empty DataFrame or read the existing one
+if csv_path.exists():
+    suggested_comps = pd.read_csv(csv_path)
+else:
+    suggested_comps = pd.DataFrame(columns=["Enemy Comp", "Counter Comp"])
 
-    # Check if suggested comp already exists in dataframe
+# display the current entries
+st.write(suggested_comps)
+
+# get user input
+enemy_comp = st.text_input("Suggested Enemy Comp (3-digit code)")
+counter_comp = st.text_input("Suggested Counter Comp (3-digit code)")
+
+# check if input is valid
+valid_input = True
+if len(enemy_comp) != 3 or not enemy_comp.isdigit():
+    st.error("Invalid Enemy Comp: Please enter a 3-digit number")
+    valid_input = False
+if len(counter_comp) != 3 or not counter_comp.isdigit():
+    st.error("Invalid Counter Comp: Please enter a 3-digit number")
+    valid_input = False
+
+if valid_input:
+    # check if the entry already exists
     if ((suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp)).any():
-        # If suggested comp already exists, increment overwrite count and update row
-        suggested_comps.loc[(suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp), "Overwrite Count"] += 1
+        st.write("Entry already exists!")
+        suggested_comps.loc[(suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp), "Counter Comp"] = counter_comp
+        st.write(f"Overwrote {sum((suggested_comps['Enemy Comp'] == enemy_comp) & (suggested_comps['Counter Comp'] == counter_comp))} duplicate entry/ies")
     else:
-        # If suggested comp does not exist, add new row
-        suggested_comps = suggested_comps.append({"Enemy Comp": enemy_comp, "Counter Comp": counter_comp, "Overwrite Count": 0}, ignore_index=True)
+        # add the new entry to the DataFrame
+        suggested_comps = suggested_comps.append({"Enemy Comp": enemy_comp, "Counter Comp": counter_comp}, ignore_index=True)
+        st.write("Entry added!")
 
-    # Save dataframe to CSV file
-    suggested_comps.to_csv("suggested_comps.csv")
+    # save the DataFrame to csv
+    suggested_comps.to_csv(csv_path, index=False)
 
-# Display existing suggested comps in a table
-try:
-    suggested_comps = pd.read_csv("suggested_comps.csv", index_col=0)
-    st.write("Existing Suggested Comps:")
-    st.write(suggested_comps)
-except FileNotFoundError:
-    st.write("No existing suggested comps.")
