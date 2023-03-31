@@ -167,38 +167,42 @@ sidebar.write("<p style='font-size: 14px;'>This application serves as a basic re
 
 
 
-import pandas as pd
 import streamlit as st
+import pandas as pd
 
-# Load the suggested comps data
-suggested_comps = pd.read_csv("suggested_comps.csv", index_col=0)
+# Load the existing data from CSV file
+suggested_comps = pd.read_csv("suggested_comps.csv")
 
-# Define the layout of the app
-st.title("Suggested Enemy Comp and Counter Comp")
-enemy_comp = st.text_input("Suggested Enemy Comp (3 digit code)")
-counter_comp = st.text_input("Suggested Counter Comp (3 digit code)")
+# Counter for generating unique widget IDs
+widget_counter = 0
 
-# Handle the submission of the form
-if st.button("Submit"):
-    # Check if the entry already exists in the dataframe
-    existing_entries = suggested_comps.loc[(suggested_comps["Enemy Comp"] == enemy_comp) & 
-                                            (suggested_comps["Counter Comp"] == counter_comp)]
-    
-    if not existing_entries.empty:
-        # If the entry already exists, merge the data
-        existing_entries["Count"] += 1
-        suggested_comps.update(existing_entries)
-        st.success("Entry updated successfully!")
-    else:
-        # If the entry does not exist, add it to the dataframe
-        new_entry = pd.DataFrame({"Enemy Comp": [enemy_comp], "Counter Comp": [counter_comp], "Count": [1]})
-        suggested_comps = pd.concat([suggested_comps, new_entry], ignore_index=True)
-        st.success("Entry added successfully!")
+# Define the Streamlit app
+def app():
 
-    # Save the updated suggested comps data to a file
-    suggested_comps.to_csv("suggested_comps.csv")
+    # Increment the widget counter
+    global widget_counter
+    widget_counter += 1
 
-# Display the table of suggested comps
-st.write("Suggested Comps:")
-st.table(suggested_comps)
+    # Create the input widgets
+    enemy_comp = st.text_input(f"Suggested Enemy Comp {widget_counter}")
+    counter_comp = st.text_input(f"Suggested Counter Comp {widget_counter}")
 
+    # Save the data when the user clicks the Submit button
+    if st.button(f"Submit {widget_counter}"):
+        # Check if the suggested comp already exists in the DataFrame
+        comp_exists = ((suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp)).any()
+        if comp_exists:
+            # If the suggested comp already exists, update the number of times it was overwritten
+            suggested_comps.loc[(suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp), "Overwritten"] += 1
+        else:
+            # If the suggested comp does not exist, add it to the DataFrame
+            suggested_comps = suggested_comps.append({"Enemy Comp": enemy_comp, "Counter Comp": counter_comp, "Overwritten": 0}, ignore_index=True)
+        # Save the DataFrame to CSV file
+        suggested_comps.to_csv("suggested_comps.csv", index=False)
+
+    # Display the table of suggested comps
+    st.table(suggested_comps)
+
+# Run the app
+if __name__ == "__main__":
+    app()
