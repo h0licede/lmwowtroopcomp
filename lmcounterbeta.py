@@ -169,16 +169,10 @@ sidebar.write("<p style='font-size: 14px;'>This application serves as a basic re
 
 import streamlit as st
 import pandas as pd
-import time
 
-# Create the URL to the raw data file
-url = f'https://raw.githubusercontent.com/h0licede/lmwowtroopcomp/main/suggested_comps.csv?time={int(time.time())}'
-
-# Read the existing data or create a new DataFrame if the file does not exist
-try:
-    suggested_comps = pd.read_csv(url)
-except:
-    suggested_comps = pd.DataFrame(columns=["Enemy Comp", "Counter Comp"])
+# Load the data from GitHub
+url = 'https://raw.githubusercontent.com/h0licede/lmwowtroopcomp/main/suggested_comps.csv'
+suggested_comps = pd.read_csv(url)
 
 # Display the current entries
 st.write(suggested_comps)
@@ -187,32 +181,27 @@ st.write(suggested_comps)
 enemy_comp = st.text_input("Suggested Enemy Comp (3-digit code)")
 counter_comp = st.text_input("Suggested Counter Comp (3-digit code)")
 
-# Check if both fields are filled
-if not enemy_comp and not counter_comp:
-    st.write("Please enter both 'Suggested Enemy Comp' and 'Suggested Counter Comp' before submitting.")
-else:
-    # Check if input is valid
-    valid_input = True
-    if len(enemy_comp) != 3 or not enemy_comp.isdigit():
-        if enemy_comp:
-            st.error("Invalid Enemy Comp: Please enter a 3-digit number")
-            valid_input = False
-    if len(counter_comp) != 3 or not counter_comp.isdigit():
-        if counter_comp:
-            st.error("Invalid Counter Comp: Please enter a 3-digit number")
-            valid_input = False
+# Check if input is valid
+valid_input = True
+if len(enemy_comp) != 3 or not enemy_comp.isdigit():
+    st.error("Invalid Enemy Comp: Please enter a 3-digit number")
+    valid_input = False
+if len(counter_comp) != 3 or not counter_comp.isdigit():
+    st.error("Invalid Counter Comp: Please enter a 3-digit number")
+    valid_input = False
 
-    if valid_input:
-        # Check if the entry already exists
-        if ((suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp)).any():
-            st.write("Entry already exists!")
-            suggested_comps.loc[(suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp), "Counter Comp"] = counter_comp
-            st.write(f"Overwrote {sum((suggested_comps['Enemy Comp'] == enemy_comp) & (suggested_comps['Counter Comp'] == counter_comp))} duplicate entry/ies")
-        else:
-            # Add the new entry to the DataFrame
-            suggested_comps = suggested_comps.append({"Enemy Comp": enemy_comp, "Counter Comp": counter_comp}, ignore_index=True)
-            st.write("Entry added!")
+if valid_input and enemy_comp and counter_comp:
+    # Check if the entry already exists
+    if ((suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp)).any():
+        st.write("Entry already exists!")
+        suggested_comps.loc[(suggested_comps["Enemy Comp"] == enemy_comp) & (suggested_comps["Counter Comp"] == counter_comp), "Counter Comp"] = counter_comp
+        st.write(f"Overwrote {sum((suggested_comps['Enemy Comp'] == enemy_comp) & (suggested_comps['Counter Comp'] == counter_comp))} duplicate entry/ies")
+    else:
+        # Add the new entry to the DataFrame
+        suggested_comps = suggested_comps.append({"Enemy Comp": enemy_comp, "Counter Comp": counter_comp}, ignore_index=True)
+        st.write("Entry added!")
 
-        # Save the DataFrame to csv
-        suggested_comps.to_csv(url, index=False)
+    # Save the DataFrame to GitHub
+    suggested_comps.to_csv(url, index=False)
+
 
